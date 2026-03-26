@@ -1,0 +1,77 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { EventCard } from "./EventCard";
+import { Filters } from "./Filters";
+import type { EventWithCategory } from "@/lib/types";
+import { Calendar, Frown } from "lucide-react";
+
+export function EventList() {
+  const searchParams = useSearchParams();
+  const [events, setEvents] = useState<EventWithCategory[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    setLoading(true);
+    const params = new URLSearchParams(searchParams.toString());
+
+    fetch(`/api/events?${params.toString()}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setEvents(data.events || []);
+        setTotal(data.total || 0);
+      })
+      .catch(() => {
+        setEvents([]);
+      })
+      .finally(() => setLoading(false));
+  }, [searchParams]);
+
+  return (
+    <div>
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-2">
+          <Calendar className="w-5 h-5 text-primary-600" />
+          <h2 className="font-semibold text-lg">
+            {total > 0 ? `${total} événement${total > 1 ? "s" : ""}` : "Événements"}
+          </h2>
+        </div>
+        <Filters />
+      </div>
+
+      {/* Grid */}
+      {loading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="card animate-pulse">
+              <div className="aspect-[16/10] bg-gray-200" />
+              <div className="p-4 space-y-3">
+                <div className="h-4 bg-gray-200 rounded w-3/4" />
+                <div className="h-3 bg-gray-200 rounded w-1/2" />
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : events.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {events.map((event) => (
+            <EventCard key={event.id} event={event} />
+          ))}
+        </div>
+      ) : (
+        <div className="text-center py-16">
+          <Frown className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+          <h3 className="text-lg font-medium text-gray-900 mb-1">
+            Aucun événement trouvé
+          </h3>
+          <p className="text-gray-500 text-sm">
+            Essaie de modifier tes filtres ou ta recherche
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
