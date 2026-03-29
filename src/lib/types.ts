@@ -12,9 +12,16 @@ export interface EventWithCategory {
   isFree: boolean;
   imageUrl: string | null;
   status: "PENDING" | "APPROVED" | "REJECTED";
+  city: string;
+  capacity: number | null;
+  rsvpCount: number;
+  viewCount: number;
+  clickCount: number;
+  submitterName: string | null;
+  submitterEmail: string | null;
   createdAt: string;
   categoryId: string;
-  organizerId: string;
+  organizerId: string | null;
   category: {
     id: string;
     name: string;
@@ -24,7 +31,7 @@ export interface EventWithCategory {
   organizer: {
     id: string;
     name: string | null;
-  };
+  } | null;
   _count?: {
     savedBy: number;
   };
@@ -39,4 +46,6 @@ export interface SearchFilters {
   lat?: number;
   lng?: number;
   radius?: number;
+  city?: string;
+  period?: "ce-soir" | "ce-week-end" | "cette-semaine";
 }

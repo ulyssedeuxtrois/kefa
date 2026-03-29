@@ -207,7 +207,7 @@ export default function EventPage() {
                   <User className="w-5 h-5 text-primary-600" />
                 </div>
                 <p className="font-medium text-gray-900">
-                  {event.organizer.name || "Anonyme"}
+                  {event.organizer?.name || event.submitterName || "Anonyme"}
                 </p>
               </div>
             </div>

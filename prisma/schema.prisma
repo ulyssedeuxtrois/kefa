@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -42,16 +43,35 @@ model Event {
   isFree      Boolean     @default(true)
   imageUrl    String?
   status      String      @default("PENDING")
+  city        String      @default("nice")
+  capacity    Int?
+  rsvpCount   Int         @default(0)
+  viewCount   Int         @default(0)
+  clickCount  Int         @default(0)
+  submitterName  String?
+  submitterEmail String?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 
   categoryId  String
   category    Category    @relation(fields: [categoryId], references: [id])
 
-  organizerId String
-  organizer   User        @relation("OrganizerEvents", fields: [organizerId], references: [id])
+  organizerId String?
+  organizer   User?       @relation("OrganizerEvents", fields: [organizerId], references: [id])
 
   savedBy     SavedEvent[]
+  rsvps       Rsvp[]
+}
+
+model Rsvp {
+  id        String   @id @default(cuid())
+  eventId   String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  name      String?
+  sessionId String
+  createdAt DateTime @default(now())
+
+  @@unique([eventId, sessionId])
 }
 
 model SavedEvent {

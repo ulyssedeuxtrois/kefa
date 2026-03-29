@@ -24,10 +24,8 @@ export function CategoryFilter() {
       <button
         onClick={() => selectCategory("")}
         className={cn(
-          "flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-colors",
-          !activeCategory
-            ? "bg-primary-600 text-white"
-            : "bg-white text-gray-600 hover:bg-gray-50 border border-gray-200"
+          "chip flex-shrink-0",
+          !activeCategory ? "chip-active" : "chip-inactive"
         )}
       >
         Tout
@@ -37,10 +35,8 @@ export function CategoryFilter() {
           key={cat.slug}
           onClick={() => selectCategory(cat.slug)}
           className={cn(
-            "flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-colors whitespace-nowrap",
-            activeCategory === cat.slug
-              ? "bg-primary-600 text-white"
-              : "bg-white text-gray-600 hover:bg-gray-50 border border-gray-200"
+            "chip flex-shrink-0 whitespace-nowrap",
+            activeCategory === cat.slug ? "chip-active" : "chip-inactive"
           )}
         >
           <span>{cat.icon}</span>
