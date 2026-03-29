@@ -3,71 +3,79 @@ import { prisma } from "@/lib/prisma";
 
 // GET /api/events — list events with filters
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
+  try {
+    const { searchParams } = new URL(request.url);
 
-  const query = searchParams.get("q") || "";
-  const category = searchParams.get("category") || "";
-  const city = searchParams.get("city") || "";
-  const isFree = searchParams.get("free") === "true";
-  const dateFrom = searchParams.get("dateFrom") || searchParams.get("from");
-  const dateTo = searchParams.get("dateTo") || searchParams.get("to");
-  const page = parseInt(searchParams.get("page") || "1");
-  const limit = parseInt(searchParams.get("limit") || "20");
+    const query = searchParams.get("q") || "";
+    const category = searchParams.get("category") || "";
+    const city = searchParams.get("city") || "";
+    const isFree = searchParams.get("free") === "true";
+    const dateFrom = searchParams.get("dateFrom") || searchParams.get("from");
+    const dateTo = searchParams.get("dateTo") || searchParams.get("to");
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "20");
 
-  const where: any = {
-    status: "APPROVED",
-  };
+    const where: any = {
+      status: "APPROVED",
+    };
 
-  if (query) {
-    where.OR = [
-      { title: { contains: query, mode: "insensitive" } },
-      { description: { contains: query, mode: "insensitive" } },
-      { location: { contains: query, mode: "insensitive" } },
-    ];
+    if (query) {
+      where.OR = [
+        { title: { contains: query, mode: "insensitive" } },
+        { description: { contains: query, mode: "insensitive" } },
+        { location: { contains: query, mode: "insensitive" } },
+      ];
+    }
+
+    if (category) {
+      where.category = { slug: category };
+    }
+
+    if (city) {
+      where.city = city;
+    }
+
+    if (isFree) {
+      where.isFree = true;
+    }
+
+    if (dateFrom) {
+      where.date = { ...where.date, gte: new Date(dateFrom) };
+    }
+
+    if (dateTo) {
+      const to = dateTo.includes("T") ? new Date(dateTo) : new Date(dateTo + "T23:59:59");
+      where.date = { ...where.date, lte: to };
+    }
+
+    const [events, total] = await Promise.all([
+      prisma.event.findMany({
+        where,
+        include: {
+          category: true,
+          organizer: { select: { id: true, name: true } },
+          _count: { select: { savedBy: true } },
+        },
+        orderBy: { date: "asc" },
+        skip: (page - 1) * limit,
+        take: limit,
+      }),
+      prisma.event.count({ where }),
+    ]);
+
+    return NextResponse.json({
+      events,
+      total,
+      page,
+      totalPages: Math.ceil(total / limit),
+    });
+  } catch (error: any) {
+    console.error("GET /api/events error:", error);
+    return NextResponse.json(
+      { error: error.message || "Internal server error", events: [], total: 0 },
+      { status: 500 }
+    );
   }
-
-  if (category) {
-    where.category = { slug: category };
-  }
-
-  if (city) {
-    where.city = city;
-  }
-
-  if (isFree) {
-    where.isFree = true;
-  }
-
-  if (dateFrom) {
-    where.date = { ...where.date, gte: new Date(dateFrom) };
-  }
-
-  if (dateTo) {
-    const to = dateTo.includes("T") ? new Date(dateTo) : new Date(dateTo + "T23:59:59");
-    where.date = { ...where.date, lte: to };
-  }
-
-  const [events, total] = await Promise.all([
-    prisma.event.findMany({
-      where,
-      include: {
-        category: true,
-        organizer: { select: { id: true, name: true } },
-        _count: { select: { savedBy: true } },
-      },
-      orderBy: { date: "asc" },
-      skip: (page - 1) * limit,
-      take: limit,
-    }),
-    prisma.event.count({ where }),
-  ]);
-
-  return NextResponse.json({
-    events,
-    total,
-    page,
-    totalPages: Math.ceil(total / limit),
-  });
 }
 
 // POST /api/events — create an event (authenticated or public submission)
