@@ -26,9 +26,9 @@ export default function HomePage() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 leading-tight">
-            Ce soir,{" "}
+            <span className="whitespace-nowrap">Ce soir,</span>{" "}
             <span className="relative">
-              tu fais quoi ?
+              <span className="whitespace-nowrap">tu fais quoi ?</span>
               <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 8" fill="none">
                 <path d="M2 6C50 2 150 2 198 6" stroke="rgba(255,255,255,0.4)" strokeWidth="3" strokeLinecap="round" />
               </svg>

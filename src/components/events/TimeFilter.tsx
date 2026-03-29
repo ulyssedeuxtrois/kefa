@@ -45,7 +45,7 @@ export function TimeFilter() {
             key={period.id}
             onClick={() => selectPeriod(period.id)}
             className={cn(
-              "chip gap-2",
+              "chip gap-2 whitespace-nowrap",
               isActive
                 ? `bg-gradient-to-r ${period.color} text-white shadow-lg`
                 : "chip-inactive"

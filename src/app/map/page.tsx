@@ -24,8 +24,9 @@ export default function MapPage() {
       ) : (
         <EventMap
           events={events}
+          center={[43.7102, 7.2620]}
           className="w-full h-full"
-          zoom={12}
+          zoom={13}
         />
       )}
     </div>

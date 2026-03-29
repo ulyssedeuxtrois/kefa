@@ -24,6 +24,7 @@ export default function EventPage() {
   const [event, setEvent] = useState<EventWithCategory | null>(null);
   const [loading, setLoading] = useState(true);
   const [saved, setSaved] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     fetch(`/api/events/${params.id}`)
@@ -57,7 +58,8 @@ export default function EventPage() {
       });
     } else {
       await navigator.clipboard.writeText(window.location.href);
-      alert("Lien copié !");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     }
   }
 
@@ -190,10 +192,10 @@ export default function EventPage() {
                 </button>
                 <button
                   onClick={share}
-                  className="flex-1 btn-secondary flex items-center justify-center gap-1.5 text-sm"
+                  className={`flex-1 flex items-center justify-center gap-1.5 text-sm py-2.5 rounded-xl font-medium transition-colors ${copied ? "bg-accent-50 text-accent-600 border border-accent-200" : "btn-secondary"}`}
                 >
                   <Share2 className="w-4 h-4" />
-                  Partager
+                  {copied ? "Lien copié !" : "Partager"}
                 </button>
               </div>
             </div>

@@ -12,7 +12,7 @@ interface EventMapProps {
 
 export function EventMap({
   events,
-  center = [48.8566, 2.3522], // Paris par défaut
+  center = [43.7102, 7.2620], // Nice par défaut
   zoom = 13,
   className = "w-full h-[400px] rounded-2xl",
 }: EventMapProps) {

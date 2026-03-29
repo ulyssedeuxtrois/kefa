@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { MapPin, Calendar, Clock, Euro, Check, ArrowLeft, Sparkles } from "lucide-react";
-import { CATEGORIES } from "@/lib/categories";
+import { Check, ArrowLeft, Sparkles } from "lucide-react";
 import { AddressAutocomplete } from "@/components/ui/AddressAutocomplete";
 import Link from "next/link";
 
