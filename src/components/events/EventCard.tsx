@@ -151,6 +151,13 @@ export function EventCard({ event }: EventCardProps) {
         <div className="mt-1.5 flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400">
           <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-gray-400" />
           <span className="line-clamp-1">{event.location}</span>
+          {event.distanceKm != null && (
+            <span className="ml-auto flex-shrink-0 text-xs font-medium text-primary-600 bg-primary-50 px-2 py-0.5 rounded-full">
+              {event.distanceKm < 1
+                ? `${Math.round(event.distanceKm * 1000)} m`
+                : `${event.distanceKm.toFixed(1)} km`}
+            </span>
+          )}
         </div>
 
         {(event.rsvpCount > 0 || capacityText) && (

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hors ligne — Ziben</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #faf8f5;
+      color: #1f2937;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.25rem;
+      text-align: center;
+    }
+
+    .icon {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 0.75rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #6b7280;
+      max-width: 340px;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #f3ede4;
+      border-radius: 1.25rem;
+      padding: 1.5rem 2rem;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 1px 6px rgba(0,0,0,.06);
+      margin-bottom: 2rem;
+    }
+
+    .card p {
+      font-size: 0.875rem;
+      color: #9ca3af;
+      margin-bottom: 0.5rem;
+    }
+
+    .card strong {
+      display: block;
+      font-size: 1rem;
+      color: #374151;
+      margin-bottom: 0.25rem;
+    }
+
+    .tip {
+      font-size: 0.8rem;
+      color: #b99d78;
+      font-style: italic;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #ff5a36;
+      color: white;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(255,90,54,.35);
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn:hover {
+      background: #e8421e;
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="icon">📡</div>
+
+  <h1>Tu es hors ligne</h1>
+  <p class="subtitle">
+    Les events que tu as consultés récemment sont disponibles ci-dessous.<br>
+    Reconnecte-toi pour voir les nouveautés.
+  </p>
+
+  <div class="card">
+    <p>Pages disponibles hors ligne :</p>
+    <strong>Les fiches d'événements que tu as visitées</strong>
+    <span class="tip">Navigue via l'historique ou tes favoris</span>
+  </div>
+
+  <a href="/" class="btn">
+    ← Retour à l'accueil
+  </a>
+</body>
+</html>

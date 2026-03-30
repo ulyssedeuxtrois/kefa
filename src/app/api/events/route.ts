@@ -17,6 +17,12 @@ export async function GET(request: NextRequest) {
     const includePast = searchParams.get("includePast") === "true";
     const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "20");
+    const sortBy = searchParams.get("sortBy") || "";
+    const latParam = searchParams.get("lat");
+    const lngParam = searchParams.get("lng");
+    const userLat = latParam ? parseFloat(latParam) : null;
+    const userLng = lngParam ? parseFloat(lngParam) : null;
+    const sortByDistance = sortBy === "distance" && userLat !== null && userLng !== null;
 
     const where: any = {
       status: "APPROVED",
@@ -61,7 +67,7 @@ export async function GET(request: NextRequest) {
       data: { boosted: false, boostedUntil: null },
     });
 
-    const [events, total] = await Promise.all([
+    const [rawEvents, total] = await Promise.all([
       prisma.event.findMany({
         where,
         include: {
@@ -69,12 +75,44 @@ export async function GET(request: NextRequest) {
           organizer: { select: { id: true, name: true } },
           _count: { select: { savedBy: true } },
         },
-        orderBy: [{ boosted: "desc" }, { date: "asc" }],
-        skip: (page - 1) * limit,
-        take: limit,
+        orderBy: sortByDistance ? [{ date: "asc" }] : [{ boosted: "desc" }, { date: "asc" }],
+        skip: sortByDistance ? 0 : (page - 1) * limit,
+        take: sortByDistance ? undefined : limit,
       }),
       prisma.event.count({ where }),
     ]);
+
+    let events: typeof rawEvents & { distanceKm?: number }[];
+
+    if (sortByDistance) {
+      const withDistance = rawEvents.map((e) => {
+        let distanceKm: number | undefined;
+        if (e.lat != null && e.lng != null) {
+          const R = 6371;
+          const dLat = (e.lat - userLat!) * Math.PI / 180;
+          const dLon = (e.lng - userLng!) * Math.PI / 180;
+          const a =
+            Math.sin(dLat / 2) ** 2 +
+            Math.cos(userLat! * Math.PI / 180) *
+              Math.cos(e.lat * Math.PI / 180) *
+              Math.sin(dLon / 2) ** 2;
+          distanceKm = R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        }
+        return { ...e, distanceKm };
+      });
+
+      withDistance.sort((a, b) => {
+        if (a.distanceKm == null && b.distanceKm == null) return 0;
+        if (a.distanceKm == null) return 1;
+        if (b.distanceKm == null) return -1;
+        return a.distanceKm - b.distanceKm;
+      });
+
+      const start = (page - 1) * limit;
+      events = withDistance.slice(start, start + limit);
+    } else {
+      events = rawEvents;
+    }
 
     return NextResponse.json({
       events,

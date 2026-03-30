@@ -1,26 +1,31 @@
-const CACHE_NAME = 'ziben-v1';
-const OFFLINE_URL = '/';
+const CACHE_STATIC = 'ziben-static-v2';
+const CACHE_PAGES  = 'ziben-pages-v2';
+const OFFLINE_URL  = '/offline.html';
 
 // Assets to pre-cache on install
 const PRECACHE_ASSETS = [
   '/',
   '/manifest.json',
   '/icon.svg',
+  OFFLINE_URL,
 ];
 
+// ─── Install ───────────────────────────────────────────────────────────────
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_ASSETS))
+    caches.open(CACHE_STATIC).then((cache) => cache.addAll(PRECACHE_ASSETS))
   );
   self.skipWaiting();
 });
 
+// ─── Activate — clear old caches ──────────────────────────────────────────
 self.addEventListener('activate', (event) => {
+  const VALID_CACHES = [CACHE_STATIC, CACHE_PAGES];
   event.waitUntil(
-    caches.keys().then((cacheNames) =>
+    caches.keys().then((names) =>
       Promise.all(
-        cacheNames
-          .filter((name) => name !== CACHE_NAME)
+        names
+          .filter((name) => !VALID_CACHES.includes(name))
           .map((name) => caches.delete(name))
       )
     )
@@ -28,6 +33,7 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
+// ─── Fetch ─────────────────────────────────────────────────────────────────
 self.addEventListener('fetch', (event) => {
   const { request } = event;
 
@@ -39,24 +45,27 @@ self.addEventListener('fetch', (event) => {
   // Skip cross-origin requests
   if (url.origin !== location.origin) return;
 
-  // For API routes: network first, no cache
+  // API routes: network only, offline stub on failure
   if (url.pathname.startsWith('/api/')) {
     event.respondWith(
-      fetch(request).catch(() => new Response(JSON.stringify({ error: 'Offline', events: [], total: 0 }), {
-        headers: { 'Content-Type': 'application/json' }
-      }))
+      fetch(request).catch(() =>
+        new Response(JSON.stringify({ error: 'Offline', events: [], total: 0 }), {
+          headers: { 'Content-Type': 'application/json' },
+        })
+      )
     );
     return;
   }
 
-  // For Next.js static assets (_next/): cache first
+  // Next.js static assets: Cache First (immutable, long TTL)
   if (url.pathname.startsWith('/_next/static/')) {
     event.respondWith(
       caches.match(request).then((cached) => {
         if (cached) return cached;
         return fetch(request).then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          if (response.ok) {
+            caches.open(CACHE_STATIC).then((cache) => cache.put(request, response.clone()));
+          }
           return response;
         });
       })
@@ -64,9 +73,51 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // For pages: stale-while-revalidate
+  // Event detail pages: Cache First with network fallback
+  // Visited pages stay available offline indefinitely
+  if (url.pathname.startsWith('/events/')) {
+    event.respondWith(
+      caches.open(CACHE_PAGES).then((cache) =>
+        cache.match(request).then((cached) => {
+          if (cached) {
+            // Revalidate in background so next visit is fresh
+            fetch(request)
+              .then((response) => { if (response.ok) cache.put(request, response.clone()); })
+              .catch(() => {});
+            return cached;
+          }
+          return fetch(request)
+            .then((response) => {
+              if (response.ok) cache.put(request, response.clone());
+              return response;
+            })
+            .catch(() => caches.match(OFFLINE_URL));
+        })
+      )
+    );
+    return;
+  }
+
+  // Homepage: Network First (fresh data when online, cached when offline)
+  if (url.pathname === '/') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response.ok) {
+            caches.open(CACHE_PAGES).then((cache) => cache.put(request, response.clone()));
+          }
+          return response;
+        })
+        .catch(() =>
+          caches.match(request).then((cached) => cached || caches.match(OFFLINE_URL))
+        )
+    );
+    return;
+  }
+
+  // All other pages: stale-while-revalidate
   event.respondWith(
-    caches.open(CACHE_NAME).then((cache) =>
+    caches.open(CACHE_PAGES).then((cache) =>
       cache.match(request).then((cached) => {
         const fetchPromise = fetch(request)
           .then((response) => {
@@ -81,7 +132,7 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-// Push notification handler
+// ─── Push notifications ────────────────────────────────────────────────────
 self.addEventListener('push', (event) => {
   if (!event.data) return;
   const data = event.data.json();

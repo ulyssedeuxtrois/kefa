@@ -1,20 +1,59 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { EventCard } from "./EventCard";
 import { Filters } from "./Filters";
 import type { EventWithCategory } from "@/lib/types";
-import { Calendar, Frown, Loader2 } from "lucide-react";
+import { Calendar, Frown, Loader2, MapPin } from "lucide-react";
 
 export function EventList() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [events, setEvents] = useState<EventWithCategory[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [geoError, setGeoError] = useState<string | null>(null);
+
+  const isDistanceSorting =
+    searchParams.get("sortBy") === "distance" &&
+    !!searchParams.get("lat") &&
+    !!searchParams.get("lng");
+
+  function handleNearMe() {
+    if (isDistanceSorting) {
+      // Désactiver le tri par distance
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete("sortBy");
+      params.delete("lat");
+      params.delete("lng");
+      router.push(`?${params.toString()}`);
+      return;
+    }
+
+    if (!navigator.geolocation) {
+      setGeoError("Géolocalisation non disponible sur ce navigateur");
+      setTimeout(() => setGeoError(null), 4000);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set("lat", String(pos.coords.latitude));
+        params.set("lng", String(pos.coords.longitude));
+        params.set("sortBy", "distance");
+        router.push(`?${params.toString()}`);
+      },
+      () => {
+        setGeoError("Localisation refusée ou indisponible");
+        setTimeout(() => setGeoError(null), 4000);
+      }
+    );
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -63,8 +102,28 @@ export function EventList() {
             {total > 0 ? `${total} événement${total > 1 ? "s" : ""}` : "Événements"}
           </h2>
         </div>
-        <Filters />
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleNearMe}
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
+              isDistanceSorting
+                ? "bg-primary-600 text-white border-primary-600"
+                : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50"
+            }`}
+          >
+            <MapPin className="w-3.5 h-3.5" />
+            Près de moi
+          </button>
+          <Filters />
+        </div>
       </div>
+
+      {/* Geo error toast */}
+      {geoError && (
+        <div className="mb-4 px-4 py-2.5 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg">
+          {geoError}
+        </div>
+      )}
 
       {/* Grid */}
       {loading ? (

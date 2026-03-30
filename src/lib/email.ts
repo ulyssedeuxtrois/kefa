@@ -68,6 +68,56 @@ export async function sendEventApproved(to: string, event: { title: string; id: 
   } catch {}
 }
 
+export async function sendWeeklyDigest(
+  to: string,
+  events: Array<{ title: string; date: string; location: string; id: string; category: { icon: string; name: string } }>,
+  name?: string
+) {
+  if (!resend) return;
+  const greeting = name ? `Salut <strong>${name}</strong>,` : "Salut,";
+  const eventsHtml = events
+    .map((e) => {
+      const d = new Date(e.date);
+      const dateStr = d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+      const timeStr = d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+      return `
+        <a href="${BASE_URL}/events/${e.id}" style="display:block;text-decoration:none;color:inherit;margin-bottom:12px;">
+          <div style="padding:14px 16px;border:1px solid #e5e5e5;border-radius:10px;background:#fafafa;transition:background 0.2s;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <span style="font-size:20px;">${e.category.icon}</span>
+              <span style="font-weight:600;font-size:15px;color:#1a1a1a;">${e.title}</span>
+            </div>
+            <div style="font-size:13px;color:#666;margin-left:28px;">
+              📅 ${dateStr} à ${timeStr}<br/>
+              📍 ${e.location}
+            </div>
+          </div>
+        </a>
+      `;
+    })
+    .join("");
+
+  try {
+    await resend.emails.send({
+      from: FROM,
+      to,
+      subject: "Ziben \u2014 Les events de la semaine \u00e0 Nice \ud83c\udf89",
+      html: wrap(`
+        <h1 style="font-size:24px;color:#F97066;margin-bottom:8px;">Les events de la semaine \ud83c\udf89</h1>
+        <p>${greeting}</p>
+        <p>Voici ce qui se passe \u00e0 Nice cette semaine :</p>
+        <div style="margin:24px 0;">
+          ${eventsHtml}
+        </div>
+        <a href="${BASE_URL}" style="display:inline-block;margin:8px 0 20px;padding:12px 28px;background:#14B8A6;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">
+          Voir tous les events
+        </a>
+        <p style="color:#666;font-size:13px;">Tu re\u00e7ois cet email car tu as un compte sur Ziben.</p>
+      `),
+    });
+  } catch {}
+}
+
 export async function sendEventSubmitted(to: string, event: { title: string }) {
   if (!resend) return;
   try {

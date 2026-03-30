@@ -35,6 +35,7 @@ export interface EventWithCategory {
   sourceUrl: string | null;
   boosted: boolean;
   boostedUntil: string | null;
+  distanceKm?: number;
   _count?: {
     savedBy: number;
   };

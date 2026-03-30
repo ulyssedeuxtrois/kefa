@@ -54,6 +54,7 @@ export default function AdminPage() {
   const [counts, setCounts] = useState({ total: 0, pending: 0, approved: 0, rejected: 0 });
   const [statusFilter, setStatusFilter] = useState("");
   const [loading, setLoading] = useState(true);
+  const [digestStatus, setDigestStatus] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState({
     title: "",
@@ -163,6 +164,21 @@ export default function AdminPage() {
     }
   }
 
+  async function sendDigest() {
+    if (!window.confirm("Envoyer le digest à tous les utilisateurs ?")) return;
+    setDigestStatus("Envoi en cours...");
+    try {
+      const res = await fetch("/api/admin/digest", {
+        method: "POST",
+        headers: adminHeaders,
+      });
+      const data = await res.json();
+      setDigestStatus(`Digest envoyé à ${data.sent} personnes`);
+    } catch {
+      setDigestStatus("Erreur lors de l'envoi");
+    }
+  }
+
   async function updateUserRole(userId: string, role: string) {
     await fetch("/api/admin/users", {
       method: "PATCH",
@@ -187,13 +203,20 @@ export default function AdminPage() {
             <p className="text-sm text-gray-500">Modération et gestion</p>
           </div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2 items-center">
           <Link href="/admin/analytics" className="btn-secondary text-sm flex items-center gap-1.5">
             <Eye className="w-4 h-4" /> Analytics
           </Link>
           <Link href="/admin/leads" className="btn-secondary text-sm flex items-center gap-1.5">
             <Users className="w-4 h-4" /> Leads
           </Link>
+          <button
+            onClick={sendDigest}
+            disabled={digestStatus === "Envoi en cours..."}
+            className="btn-secondary text-sm flex items-center gap-1.5 disabled:opacity-50"
+          >
+            📧 {digestStatus || "Envoyer digest"}
+          </button>
         </div>
       </div>
 
