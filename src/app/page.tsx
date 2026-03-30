@@ -171,67 +171,70 @@ export default async function HomePage() {
 
       {/* ─── TENDANCES ────────────────────────────────────────────────────── */}
       {trendingEvents.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-10">
-          <div className="flex items-end justify-between mb-5">
-            <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
-              🔥 En ce moment
-            </h2>
-            <Link href="/?sortBy=trending" className="text-sm font-medium text-primary-500 hover:text-primary-600 transition-colors">
-              Voir tout
-            </Link>
-          </div>
+        <div className="section-coral py-10">
+          <section className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="flex items-end justify-between mb-5">
+              <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
+                🔥 En ce moment
+              </h2>
+              <Link href="/?sortBy=trending" className="text-sm font-medium text-primary-500 hover:text-primary-600 transition-colors">
+                Voir tout
+              </Link>
+            </div>
 
-          {/* Scroll horizontal sur mobile, grille 4 colonnes sur desktop */}
-          <div className="flex gap-4 overflow-x-auto pb-2 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible scrollbar-hide">
-            {trendingEvents.map((event) => {
-              const gradient = CAT_GRADIENTS[event.category.slug] ?? DEFAULT_GRADIENT;
-              const dateObj = new Date(event.date);
-              const dayLabel = dateObj.toLocaleDateString("fr-FR", { weekday: "short", day: "numeric", month: "short" });
+            {/* Scroll horizontal sur mobile, grille 4 colonnes sur desktop */}
+            <div className="flex gap-4 overflow-x-auto pb-2 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible scrollbar-hide">
+              {trendingEvents.map((event) => {
+                const gradient = CAT_GRADIENTS[event.category.slug] ?? DEFAULT_GRADIENT;
+                const dateObj = new Date(event.date);
+                const dayLabel = dateObj.toLocaleDateString("fr-FR", { weekday: "short", day: "numeric", month: "short" });
 
-              return (
-                <Link
-                  key={event.id}
-                  href={`/events/${event.id}`}
-                  className="group relative flex-shrink-0 w-64 sm:w-auto rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-200"
-                  style={{ background: gradient }}
-                >
-                  {/* Déco cercles */}
-                  <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-white/10" />
-                  <div className="absolute -bottom-8 -left-4 w-32 h-32 rounded-full bg-white/10" />
+                return (
+                  <Link
+                    key={event.id}
+                    href={`/events/${event.id}`}
+                    className="group relative flex-shrink-0 w-64 sm:w-auto rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-200"
+                    style={{ background: gradient }}
+                  >
+                    {/* Déco cercles */}
+                    <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-white/10" />
+                    <div className="absolute -bottom-8 -left-4 w-32 h-32 rounded-full bg-white/10" />
 
-                  <div className="relative p-4 flex flex-col gap-3 h-full min-h-[140px]">
-                    {/* Badge catégorie */}
-                    <span className="inline-flex items-center gap-1 self-start bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full">
-                      <span>{event.category.icon}</span>
-                      <span>{event.category.name}</span>
-                    </span>
+                    <div className="relative p-4 flex flex-col gap-3 h-full min-h-[140px]">
+                      {/* Badge catégorie */}
+                      <span className="inline-flex items-center gap-1 self-start bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+                        <span>{event.category.icon}</span>
+                        <span>{event.category.name}</span>
+                      </span>
 
-                    {/* Titre */}
-                    <p className="text-white font-bold text-base leading-tight line-clamp-2 flex-1 group-hover:underline underline-offset-2">
-                      {event.title}
-                    </p>
+                      {/* Titre */}
+                      <p className="text-white font-bold text-base leading-tight line-clamp-2 flex-1 group-hover:underline underline-offset-2">
+                        {event.title}
+                      </p>
 
-                    {/* Date + lieu */}
-                    <div className="flex flex-col gap-1">
-                      <div className="flex items-center gap-1.5 text-white/80 text-xs">
-                        <Calendar className="w-3 h-3 shrink-0" />
-                        <span className="capitalize">{dayLabel}</span>
-                      </div>
-                      <div className="flex items-center gap-1.5 text-white/80 text-xs">
-                        <MapPin className="w-3 h-3 shrink-0" />
-                        <span className="truncate">{event.location}</span>
+                      {/* Date + lieu */}
+                      <div className="flex flex-col gap-1">
+                        <div className="flex items-center gap-1.5 text-white/80 text-xs">
+                          <Calendar className="w-3 h-3 shrink-0" />
+                          <span className="capitalize">{dayLabel}</span>
+                        </div>
+                        <div className="flex items-center gap-1.5 text-white/80 text-xs">
+                          <MapPin className="w-3 h-3 shrink-0" />
+                          <span className="truncate">{event.location}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </section>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        </div>
       )}
 
       {/* ─── EVENTS ───────────────────────────────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+      <div className="section-warm py-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="mb-6">
           <h2 className="text-2xl font-extrabold text-gray-900 dark:text-white">À venir sur la Côte d'Azur</h2>
           <p className="text-sm text-gray-500 mt-0.5">Tous les events, filtrés et à jour</p>
@@ -262,6 +265,7 @@ export default async function HomePage() {
           </Suspense>
         </div>
       </section>
+      </div>
 
       {/* ─── CTA ORGANISATEURS ────────────────────────────────────────────── */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 pb-16">

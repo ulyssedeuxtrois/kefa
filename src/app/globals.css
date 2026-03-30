@@ -5,9 +5,8 @@
 @layer base {
   body {
     @apply text-gray-900 antialiased dark:text-gray-100;
-    background-color: #faf8f5;
-    background-image: radial-gradient(#e8dfd0 1px, transparent 1px);
-    background-size: 24px 24px;
+    background: linear-gradient(180deg, #fff7f4 0%, #faf8f5 40%, #f5f3ef 100%);
+    background-attachment: fixed;
   }
 
   .dark body {
@@ -35,7 +34,8 @@
   }
 
   .card {
-    @apply bg-white rounded-2xl border border-warm-100 overflow-hidden transition-all duration-300 dark:bg-gray-900 dark:border-gray-800;
+    @apply rounded-2xl border border-warm-100 overflow-hidden transition-all duration-300 dark:bg-gray-900 dark:border-gray-800;
+    background-color: #fffdf9;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
   }
 
@@ -66,6 +66,16 @@
 
   .section-label {
     @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary-500 mb-2;
+  }
+
+  .section-warm {
+    background: linear-gradient(135deg, #fff5f0 0%, #fffbf5 50%, #f0fdf4 100%);
+  }
+
+  .section-coral {
+    background: linear-gradient(135deg, #fff1ed 0%, #fff5f0 100%);
+    border-top: 1px solid #ffe4dc;
+    border-bottom: 1px solid #ffe4dc;
   }
 }
 
