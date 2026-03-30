@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import webpush from "web-push";
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   webpush.setVapidDetails(
     process.env.VAPID_EMAIL!,
