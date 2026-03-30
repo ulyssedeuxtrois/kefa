@@ -21,11 +21,11 @@ export async function POST(
 
     if (existing) {
       await prisma.rsvp.delete({ where: { id: existing.id } });
-      await prisma.event.update({
+      const event = await prisma.event.update({
         where: { id },
         data: { rsvpCount: { decrement: 1 } },
       });
-      return NextResponse.json({ attending: false });
+      return NextResponse.json({ rsvped: false, rsvpCount: event.rsvpCount });
     }
 
     await prisma.rsvp.create({
@@ -36,7 +36,7 @@ export async function POST(
       data: { rsvpCount: { increment: 1 } },
     });
 
-    return NextResponse.json({ attending: true, count: event.rsvpCount });
+    return NextResponse.json({ rsvped: true, rsvpCount: event.rsvpCount });
   } catch (error) {
     console.error("RSVP error:", error);
     return NextResponse.json({ error: "Erreur" }, { status: 500 });
@@ -59,5 +59,5 @@ export async function GET(
     where: { eventId_sessionId: { eventId: id, sessionId } },
   });
 
-  return NextResponse.json({ attending: !!rsvp });
+  return NextResponse.json({ rsvped: !!rsvp });
 }
