@@ -77,11 +77,23 @@ export default function AdminPage() {
   }
 
   async function updateEventStatus(eventId: string, status: string) {
+    const event = events.find((e) => e.id === eventId);
     await fetch("/api/admin/events", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ eventId, status }),
     });
+    if (status === "APPROVED" && event) {
+      fetch("/api/push/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: "Nouvel event à Nice ! 🎉",
+          body: event.title,
+          url: `/events/${event.id}`,
+        }),
+      }).catch(() => {});
+    }
     fetchEvents();
   }
 

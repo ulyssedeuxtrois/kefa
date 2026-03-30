@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { AuthProvider } from "@/lib/auth";
 import { PWAInstallPrompt } from "@/components/pwa/PWAInstallPrompt";
 import { BottomNav } from "@/components/pwa/BottomNav";
+import { PushPrompt } from "@/components/PushPrompt";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -81,6 +82,7 @@ export default function RootLayout({
           <BottomNav />
           <Footer />
           <PWAInstallPrompt />
+          <PushPrompt />
         </AuthProvider>
         <Script
           id="register-sw"

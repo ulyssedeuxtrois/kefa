@@ -83,3 +83,12 @@ model SavedEvent {
 
   @@unique([userId, eventId])
 }
+
+model PushSubscription {
+  id        String   @id @default(cuid())
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  userId    String?
+  createdAt DateTime @default(now())
+}
