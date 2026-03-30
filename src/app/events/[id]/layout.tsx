@@ -21,7 +21,9 @@ export async function generateMetadata({
     openGraph: {
       title: event.title,
       description,
-      images: event.imageUrl ? [event.imageUrl] : [],
+      images: event.imageUrl
+        ? [event.imageUrl]
+        : [{ url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://ziben.onrender.com"}/icons/icon-512.png`, width: 512, height: 512 }],
       type: "website",
     },
     other: {
