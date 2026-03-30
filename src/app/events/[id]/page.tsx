@@ -9,13 +9,16 @@ import {
   Tag,
   Heart,
   Share2,
+  Copy,
+  MessageCircle,
   ArrowLeft,
   User,
   Users,
   Zap,
+  Check,
 } from "lucide-react";
 import Link from "next/link";
-import { formatDate, formatTime, formatPrice, generateSessionId } from "@/lib/utils";
+import { formatDate, formatTime, formatPrice, formatRelativeDate, generateSessionId } from "@/lib/utils";
 import { EventMap } from "@/components/map/EventMap";
 import { EventJsonLd } from "@/components/seo/EventJsonLd";
 import { useAuth } from "@/lib/auth";
@@ -50,6 +53,74 @@ const BOOST_OPTIONS = [
   { days: 30, price: "15€", label: "1 mois" },
 ];
 
+function ShareButtons({ event }: { event: EventWithCategory }) {
+  const [copied, setCopied] = useState(false);
+  const [hasNativeShare] = useState(() =>
+    typeof navigator !== "undefined" && !!navigator.share
+  );
+
+  const url = typeof window !== "undefined"
+    ? `${window.location.origin}/events/${event.id}`
+    : "";
+
+  const whatsappText = `${event.title} — ${formatRelativeDate(event.date)} à ${event.location}\n${url}`;
+
+  async function copyLink() {
+    await navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
+
+  async function nativeShare() {
+    try {
+      await navigator.share({
+        title: event.title,
+        text: `Découvre cet événement sur Ziben : ${event.title}`,
+        url,
+      });
+    } catch {
+      // user cancelled
+    }
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      <a
+        href={`https://wa.me/?text=${encodeURIComponent(whatsappText)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-center w-10 h-10 rounded-xl bg-green-50 text-green-600 hover:bg-green-100 transition-colors"
+        title="Partager sur WhatsApp"
+      >
+        <MessageCircle className="w-4.5 h-4.5" />
+      </a>
+      <button
+        onClick={copyLink}
+        className={`flex items-center justify-center w-10 h-10 rounded-xl transition-colors ${
+          copied
+            ? "bg-accent-50 text-accent-600 border border-accent-200"
+            : "bg-gray-50 text-gray-600 hover:bg-gray-100"
+        }`}
+        title={copied ? "Copié !" : "Copier le lien"}
+      >
+        {copied ? <Check className="w-4.5 h-4.5" /> : <Copy className="w-4.5 h-4.5" />}
+      </button>
+      {hasNativeShare && (
+        <button
+          onClick={nativeShare}
+          className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-50 text-gray-600 hover:bg-gray-100 transition-colors"
+          title="Partager"
+        >
+          <Share2 className="w-4.5 h-4.5" />
+        </button>
+      )}
+      {copied && (
+        <span className="text-xs text-accent-600 font-medium animate-in fade-in">Copié !</span>
+      )}
+    </div>
+  );
+}
+
 export default function EventPage() {
   const params = useParams();
   const searchParams = useSearchParams();
@@ -57,7 +128,6 @@ export default function EventPage() {
   const [event, setEvent] = useState<EventWithCategory | null>(null);
   const [loading, setLoading] = useState(true);
   const [saved, setSaved] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [rsvped, setRsvped] = useState(false);
   const [rsvpCount, setRsvpCount] = useState(0);
   const [rsvpLoading, setRsvpLoading] = useState(false);
@@ -161,20 +231,6 @@ export default function EventPage() {
       // ignore
     } finally {
       setBoostLoading(null);
-    }
-  }
-
-  async function share() {
-    if (navigator.share) {
-      await navigator.share({
-        title: event!.title,
-        text: `Découvre cet événement sur Ziben : ${event!.title}`,
-        url: window.location.href,
-      });
-    } else {
-      await navigator.clipboard.writeText(window.location.href);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
     }
   }
 
@@ -373,10 +429,10 @@ export default function EventPage() {
                 </div>
               )}
 
-              <div className="flex gap-2">
+              <div className="flex flex-col gap-3">
                 <button
                   onClick={toggleSave}
-                  className={`flex-1 flex items-center justify-center gap-1.5 text-sm py-2.5 rounded-xl font-medium transition-colors ${
+                  className={`w-full flex items-center justify-center gap-1.5 text-sm py-2.5 rounded-xl font-medium transition-colors ${
                     saved
                       ? "bg-red-50 text-red-600 border border-red-200"
                       : "btn-secondary"
@@ -387,13 +443,7 @@ export default function EventPage() {
                   />
                   {saved ? "Sauvegardé" : "Sauvegarder"}
                 </button>
-                <button
-                  onClick={share}
-                  className={`flex-1 flex items-center justify-center gap-1.5 text-sm py-2.5 rounded-xl font-medium transition-colors ${copied ? "bg-accent-50 text-accent-600 border border-accent-200" : "btn-secondary"}`}
-                >
-                  <Share2 className="w-4 h-4" />
-                  {copied ? "Lien copié !" : "Partager"}
-                </button>
+                <ShareButtons event={event} />
               </div>
             </div>
 
