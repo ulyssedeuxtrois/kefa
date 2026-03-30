@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { verifyAdmin } from "@/lib/admin-auth";
+import { sendEventApproved } from "@/lib/email";
 
 // GET /api/admin/events — list all events for moderation
 export async function GET(request: NextRequest) {
@@ -52,8 +53,18 @@ export async function PATCH(request: NextRequest) {
     const event = await prisma.event.update({
       where: { id: eventId },
       data: { status },
-      include: { category: true },
+      include: {
+        category: true,
+        organizer: { select: { email: true } },
+      },
     });
+
+    if (status === "APPROVED") {
+      const recipientEmail = event.organizer?.email || event.submitterEmail;
+      if (recipientEmail) {
+        sendEventApproved(recipientEmail, { title: event.title, id: event.id }).catch(() => {});
+      }
+    }
 
     return NextResponse.json(event);
   } catch (error) {

@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, MapPin, Plus, User, LogOut, Shield, Heart, Sparkles } from "lucide-react";
 import { useAuth } from "@/lib/auth";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, logout, isOrganizer, isAdmin } = useAuth();
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100/50">
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100/50 dark:bg-gray-950/80 dark:border-gray-800/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -18,20 +19,20 @@ export function Header() {
             <div className="w-9 h-9 bg-gradient-to-br from-primary-500 to-primary-600 rounded-xl flex items-center justify-center shadow-lg shadow-primary-500/20">
               <MapPin className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-extrabold text-gray-900">Ziben</span>
+            <span className="text-xl font-extrabold text-gray-900 dark:text-gray-100">Ziben</span>
           </Link>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-6">
             <Link
               href="/"
-              className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+              className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 transition-colors"
             >
               Explorer
             </Link>
             <Link
               href="/map"
-              className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+              className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 transition-colors"
             >
               Carte
             </Link>
@@ -45,7 +46,7 @@ export function Header() {
             {isOrganizer && (
               <Link
                 href="/organizer"
-                className="flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                className="flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 Publier
@@ -64,26 +65,27 @@ export function Header() {
 
           {/* Desktop actions */}
           <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             {user ? (
               <div className="flex items-center gap-3">
                 <Link
                   href="/saved"
-                  className="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                   title="Mes favoris"
                 >
                   <Heart className="w-5 h-5 text-gray-600" />
                 </Link>
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50">
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-50 dark:bg-gray-800">
                   <div className="w-7 h-7 bg-primary-100 rounded-full flex items-center justify-center">
                     <User className="w-4 h-4 text-primary-500" />
                   </div>
-                  <span className="text-sm font-medium text-gray-700">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                     {user.name || user.email}
                   </span>
                 </div>
                 <button
                   onClick={logout}
-                  className="p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-500"
+                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-500"
                   title="Déconnexion"
                 >
                   <LogOut className="w-4 h-4" />
@@ -104,7 +106,7 @@ export function Header() {
           {/* Mobile menu button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           >
             {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -112,7 +114,7 @@ export function Header() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-100 animate-fade-in-up">
+          <div className="md:hidden py-4 border-t border-gray-100 dark:border-gray-800 animate-fade-in-up">
             <nav className="flex flex-col gap-1">
               <Link
                 href="/"

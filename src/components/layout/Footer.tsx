@@ -36,6 +36,7 @@ export function Footer() {
             <h3 className="text-sm font-semibold text-white mb-3">Proposer</h3>
             <ul className="space-y-2">
               <li><Link href="/submit" className="text-sm text-gray-400 hover:text-white transition-colors">Publier un événement</Link></li>
+              <li><Link href="/pour-les-pros" className="text-sm text-gray-400 hover:text-white transition-colors">Pour les pros</Link></li>
               <li><Link href="/organizer" className="text-sm text-gray-400 hover:text-white transition-colors">Espace organisateur</Link></li>
               <li><Link href="/register" className="text-sm text-gray-400 hover:text-white transition-colors">Devenir organisateur</Link></li>
             </ul>
@@ -48,6 +49,7 @@ export function Footer() {
               <li><Link href="/login" className="text-sm text-gray-400 hover:text-white transition-colors">Connexion</Link></li>
               <li><Link href="/register" className="text-sm text-gray-400 hover:text-white transition-colors">Inscription</Link></li>
               <li><Link href="/saved" className="text-sm text-gray-400 hover:text-white transition-colors">Mes favoris</Link></li>
+              <li><Link href="/stats" className="text-sm text-gray-400 hover:text-white transition-colors">Ziben en chiffres</Link></li>
             </ul>
           </div>
         </div>

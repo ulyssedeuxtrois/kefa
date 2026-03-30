@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { notifyNewEvent } from "@/lib/notify";
+import { sendEventSubmitted } from "@/lib/email";
 
 // GET /api/events — list events with filters
 export async function GET(request: NextRequest) {
@@ -134,6 +135,10 @@ export async function POST(request: NextRequest) {
       submitterEmail: event.submitterEmail,
       source: body.organizerId ? "organizer" : "public",
     }).catch(() => {});
+
+    if (event.submitterEmail) {
+      sendEventSubmitted(event.submitterEmail, { title: event.title }).catch(() => {});
+    }
 
     return NextResponse.json(event, { status: 201 });
   } catch (error) {

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { createHash } from "crypto";
 import { notifyNewOrganizer } from "@/lib/notify";
+import { sendWelcomeOrganizer } from "@/lib/email";
 
 function hashPassword(password: string): string {
   return createHash("sha256")
@@ -46,6 +47,7 @@ export async function POST(request: NextRequest) {
 
     if (user.role === "ORGANIZER") {
       notifyNewOrganizer(user).catch(() => {});
+      sendWelcomeOrganizer(user.email, user.name || "Organisateur").catch(() => {});
     }
 
     return NextResponse.json(user, { status: 201 });
