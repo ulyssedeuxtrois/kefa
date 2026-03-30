@@ -56,7 +56,7 @@ export async function GET(request: NextRequest) {
           organizer: { select: { id: true, name: true } },
           _count: { select: { savedBy: true } },
         },
-        orderBy: { date: "asc" },
+        orderBy: [{ boosted: "desc" }, { date: "asc" }],
         skip: (page - 1) * limit,
         take: limit,
       }),

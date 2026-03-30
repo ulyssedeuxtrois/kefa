@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import {
   Calendar,
   MapPin,
@@ -12,6 +12,7 @@ import {
   ArrowLeft,
   User,
   Users,
+  Zap,
 } from "lucide-react";
 import Link from "next/link";
 import { formatDate, formatTime, formatPrice, generateSessionId } from "@/lib/utils";
@@ -27,8 +28,15 @@ interface SimilarEvent {
   category: { icon: string; name: string };
 }
 
+const BOOST_OPTIONS = [
+  { days: 7,  price: "5€",  label: "1 semaine" },
+  { days: 14, price: "9€",  label: "2 semaines" },
+  { days: 30, price: "15€", label: "1 mois" },
+];
+
 export default function EventPage() {
   const params = useParams();
+  const searchParams = useSearchParams();
   const { user } = useAuth();
   const [event, setEvent] = useState<EventWithCategory | null>(null);
   const [loading, setLoading] = useState(true);
@@ -38,6 +46,8 @@ export default function EventPage() {
   const [rsvpCount, setRsvpCount] = useState(0);
   const [rsvpLoading, setRsvpLoading] = useState(false);
   const [similarEvents, setSimilarEvents] = useState<SimilarEvent[]>([]);
+  const [boostLoading, setBoostLoading] = useState<number | null>(null);
+  const justBoosted = searchParams.get("boosted") === "1";
 
   useEffect(() => {
     fetch(`/api/events/${params.id}`)
@@ -124,6 +134,23 @@ export default function EventPage() {
     setSaved(data.saved);
   }
 
+  async function handleBoost(days: number) {
+    setBoostLoading(days);
+    try {
+      const res = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ eventId: event!.id, days }),
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+    } catch {
+      // ignore
+    } finally {
+      setBoostLoading(null);
+    }
+  }
+
   async function share() {
     if (navigator.share) {
       await navigator.share({
@@ -174,6 +201,13 @@ export default function EventPage() {
         Retour
       </Link>
 
+      {justBoosted && (
+        <div className="bg-green-50 border border-green-200 text-green-800 rounded-xl px-4 py-3 mb-6 flex items-center gap-2">
+          <Zap className="w-4 h-4 fill-green-500 text-green-500" />
+          <span className="font-medium">Ton event est maintenant mis en avant !</span>
+        </div>
+      )}
+
       <div className="relative aspect-[16/9] bg-gray-100 rounded-2xl overflow-hidden mb-6">
         {event.imageUrl ? (
           <img
@@ -190,9 +224,17 @@ export default function EventPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="md:col-span-2">
-          <span className="inline-flex items-center gap-1.5 bg-primary-50 text-primary-700 text-sm font-medium px-3 py-1 rounded-full mb-3">
-            {event.category.icon} {event.category.name}
-          </span>
+          <div className="flex items-center gap-2 mb-3">
+            <span className="inline-flex items-center gap-1.5 bg-primary-50 text-primary-700 text-sm font-medium px-3 py-1 rounded-full">
+              {event.category.icon} {event.category.name}
+            </span>
+            {event.boosted && (
+              <span className="inline-flex items-center gap-1 bg-yellow-50 text-yellow-700 text-xs font-semibold px-2.5 py-1 rounded-full border border-yellow-200">
+                <Zap className="w-3 h-3 fill-yellow-500 text-yellow-500" />
+                En vedette
+              </span>
+            )}
+          </div>
 
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
             {event.title}
@@ -320,6 +362,46 @@ export default function EventPage() {
                 </p>
               </div>
             </div>
+
+            {user && user.id === event.organizerId && !event.boosted && (
+              <div className="card p-5 border-yellow-200 bg-yellow-50/50">
+                <div className="flex items-center gap-2 mb-1">
+                  <Zap className="w-4 h-4 text-yellow-600" />
+                  <h3 className="text-sm font-semibold text-yellow-800">Mettre en avant</h3>
+                </div>
+                <p className="text-xs text-yellow-700 mb-3">
+                  Ton event passe en tête de liste et reçoit une notification dédiée.
+                </p>
+                <div className="space-y-2">
+                  {BOOST_OPTIONS.map((opt) => (
+                    <button
+                      key={opt.days}
+                      onClick={() => handleBoost(opt.days)}
+                      disabled={boostLoading !== null}
+                      className="w-full flex items-center justify-between text-sm py-2 px-3 bg-white rounded-lg border border-yellow-200 hover:border-yellow-400 hover:bg-yellow-50 transition-colors font-medium text-gray-800 disabled:opacity-60"
+                    >
+                      <span>{opt.label}</span>
+                      <span className="text-yellow-700 font-semibold">
+                        {boostLoading === opt.days ? "..." : opt.price}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {event.boosted && event.organizerId === user?.id && (
+              <div className="card p-4 border-yellow-200 bg-yellow-50/50">
+                <div className="flex items-center gap-2 text-yellow-700">
+                  <Zap className="w-4 h-4 fill-yellow-500" />
+                  <span className="text-sm font-medium">En vedette jusqu&apos;au{" "}
+                    {event.boostedUntil
+                      ? new Date(event.boostedUntil).toLocaleDateString("fr-FR", { day: "numeric", month: "long" })
+                      : "—"}
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

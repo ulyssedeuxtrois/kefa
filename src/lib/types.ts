@@ -32,6 +32,8 @@ export interface EventWithCategory {
     id: string;
     name: string | null;
   } | null;
+  boosted: boolean;
+  boostedUntil: string | null;
   _count?: {
     savedBy: number;
   };
