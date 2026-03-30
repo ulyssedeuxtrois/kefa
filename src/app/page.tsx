@@ -23,6 +23,21 @@ const CAT_GRADIENTS: Record<string, string> = {
 };
 const DEFAULT_GRADIENT = "linear-gradient(135deg, #374151 0%, #6b7280 50%, #9ca3af 100%)";
 
+const CAT_PHOTOS: Record<string, string> = {
+  "musique-soirees":        "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=400&fit=crop",
+  "arts-spectacles":        "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=600&h=400&fit=crop",
+  "culture-expositions":    "https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=600&h=400&fit=crop",
+  "conferences-savoirs":    "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=400&fit=crop",
+  "vie-locale":             "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=400&fit=crop",
+  "sport-bien-etre":        "https://images.unsplash.com/photo-1461896836934-bd45ba10a444?w=600&h=400&fit=crop",
+  "food-degustations":      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop",
+  "famille-enfants":        "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=600&h=400&fit=crop",
+  "nature-decouvertes":     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=400&fit=crop",
+  "jeux-geek":              "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&h=400&fit=crop",
+  "business-networking":    "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=400&fit=crop",
+  "evenements-saisonniers": "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&h=400&fit=crop",
+};
+
 // Petites pills déco dans le hero — vibes locales
 const HERO_PILLS = [
   { icon: "🎵", label: "Concert", top: "12%", left: "4%",  rotate: "-6deg",  delay: "0s" },
@@ -186,6 +201,7 @@ export default async function HomePage() {
             <div className="flex gap-4 overflow-x-auto pb-2 sm:pb-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:overflow-visible scrollbar-hide">
               {trendingEvents.map((event) => {
                 const gradient = CAT_GRADIENTS[event.category.slug] ?? DEFAULT_GRADIENT;
+                const photo = CAT_PHOTOS[event.category.slug];
                 const dateObj = new Date(event.date);
                 const dayLabel = dateObj.toLocaleDateString("fr-FR", { weekday: "short", day: "numeric", month: "short" });
 
@@ -193,32 +209,40 @@ export default async function HomePage() {
                   <Link
                     key={event.id}
                     href={`/events/${event.id}`}
-                    className="group relative flex-shrink-0 w-64 sm:w-auto rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-200"
+                    className="group relative flex-shrink-0 w-64 sm:w-auto rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                     style={{ background: gradient }}
                   >
-                    {/* Déco cercles */}
-                    <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-white/10" />
-                    <div className="absolute -bottom-8 -left-4 w-32 h-32 rounded-full bg-white/10" />
+                    {/* Photo de fond */}
+                    {photo && (
+                      <img
+                        src={photo}
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 group-hover:scale-105 transition-all duration-500"
+                        loading="lazy"
+                      />
+                    )}
+                    {/* Overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
                     <div className="relative p-4 flex flex-col gap-3 h-full min-h-[140px]">
                       {/* Badge catégorie */}
-                      <span className="inline-flex items-center gap-1 self-start bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+                      <span className="inline-flex items-center gap-1 self-start bg-black/30 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full border border-white/10">
                         <span>{event.category.icon}</span>
                         <span>{event.category.name}</span>
                       </span>
 
                       {/* Titre */}
-                      <p className="text-white font-bold text-base leading-tight line-clamp-2 flex-1 group-hover:underline underline-offset-2">
+                      <p className="text-white font-bold text-base leading-tight line-clamp-2 flex-1 group-hover:underline underline-offset-2 drop-shadow-md">
                         {event.title}
                       </p>
 
                       {/* Date + lieu */}
                       <div className="flex flex-col gap-1">
-                        <div className="flex items-center gap-1.5 text-white/80 text-xs">
+                        <div className="flex items-center gap-1.5 text-white/90 text-xs drop-shadow-sm">
                           <Calendar className="w-3 h-3 shrink-0" />
                           <span className="capitalize">{dayLabel}</span>
                         </div>
-                        <div className="flex items-center gap-1.5 text-white/80 text-xs">
+                        <div className="flex items-center gap-1.5 text-white/90 text-xs drop-shadow-sm">
                           <MapPin className="w-3 h-3 shrink-0" />
                           <span className="truncate">{event.location}</span>
                         </div>

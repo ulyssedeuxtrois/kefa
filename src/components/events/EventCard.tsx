@@ -29,24 +29,21 @@ const CAT_STYLES: Record<string, { gradient: string; dot: string }> = {
 
 const DEFAULT_STYLE = { gradient: "linear-gradient(135deg, #374151 0%, #6b7280 50%, #9ca3af 100%)", dot: "#d1d5db" };
 
-function CategoryPlaceholder({ slug, icon }: { slug: string; icon: string }) {
-  const style = CAT_STYLES[slug] || DEFAULT_STYLE;
-  return (
-    <div
-      className="w-full h-full flex items-center justify-center relative overflow-hidden"
-      style={{ background: style.gradient }}
-    >
-      {/* Déco cercles en arrière-plan */}
-      <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full opacity-20" style={{ background: style.dot }} />
-      <div className="absolute -bottom-12 -left-6 w-40 h-40 rounded-full opacity-15" style={{ background: style.dot }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full opacity-10" style={{ background: style.dot }} />
-      {/* Icone principale */}
-      <span className="relative text-5xl drop-shadow-lg" style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.3))" }}>
-        {icon}
-      </span>
-    </div>
-  );
-}
+// Photos Unsplash par catégorie — fallback quand l'event n'a pas d'image
+const CAT_PHOTOS: Record<string, string> = {
+  "musique-soirees":        "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=600&h=400&fit=crop",
+  "arts-spectacles":        "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=600&h=400&fit=crop",
+  "culture-expositions":    "https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=600&h=400&fit=crop",
+  "conferences-savoirs":    "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=400&fit=crop",
+  "vie-locale":             "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=400&fit=crop",
+  "sport-bien-etre":        "https://images.unsplash.com/photo-1461896836934-bd45ba10a444?w=600&h=400&fit=crop",
+  "food-degustations":      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop",
+  "famille-enfants":        "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=600&h=400&fit=crop",
+  "nature-decouvertes":     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=400&fit=crop",
+  "jeux-geek":              "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&h=400&fit=crop",
+  "business-networking":    "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&h=400&fit=crop",
+  "evenements-saisonniers": "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&h=400&fit=crop",
+};
 
 export function EventCard({ event }: EventCardProps) {
   const { user } = useAuth();
@@ -83,17 +80,18 @@ export function EventCard({ event }: EventCardProps) {
     <Link href={`/events/${event.id}`} className="card group block">
       <div className="h-1 w-full" style={{ background: style.gradient }} />
       <div className="relative aspect-[4/3] overflow-hidden">
-        {event.imageUrl ? (
-          <img
-            src={event.imageUrl}
-            alt={event.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-        ) : (
-          <div className="w-full h-full group-hover:scale-105 transition-transform duration-500">
-            <CategoryPlaceholder slug={event.category.slug} icon={event.category.icon} />
-          </div>
-        )}
+        <img
+          src={event.imageUrl || CAT_PHOTOS[event.category.slug] || ""}
+          alt={event.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+          onError={(e) => {
+            // Fallback gradient si l'image charge pas
+            const target = e.currentTarget;
+            target.style.display = "none";
+            target.parentElement?.classList.add("cat-fallback");
+          }}
+        />
 
         {/* Gradient overlay en bas */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
