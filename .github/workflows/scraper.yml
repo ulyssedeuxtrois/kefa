@@ -1,0 +1,39 @@
+name: 🕷️ Ziben Event Scraper
+
+on:
+  schedule:
+    # Toutes les 6h : 0h, 6h, 12h, 18h (UTC)
+    - cron: '0 0,6,12,18 * * *'
+  workflow_dispatch:
+    # Déclenchement manuel depuis GitHub Actions
+    inputs:
+      dry_run:
+        description: 'Dry run (affiche sans importer)'
+        required: false
+        default: 'false'
+
+jobs:
+  scrape:
+    name: Scrape & import Nice events
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run scraper
+        env:
+          ZIBEN_BASE_URL: ${{ secrets.ZIBEN_BASE_URL }}
+          ZIBEN_IMPORT_SECRET: ${{ secrets.ZIBEN_IMPORT_SECRET }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        run: node scripts/scraper.mjs
+
+      - name: Summary
+        if: always()
+        run: echo "Scraper terminé — voir les logs ci-dessus"

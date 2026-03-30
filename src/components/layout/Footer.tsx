@@ -56,9 +56,14 @@ export function Footer() {
           <p className="text-xs text-gray-500">
             &copy; {new Date().getFullYear()} Ziben. Tous droits réservés.
           </p>
-          <p className="text-xs text-gray-500 flex items-center gap-1">
-            Fait avec <Heart className="w-3 h-3 text-primary-500" /> à Nice
-          </p>
+          <div className="flex items-center gap-4">
+            <Link href="/legal" className="text-xs text-gray-500 hover:text-gray-300 transition-colors">Mentions légales</Link>
+            <Link href="/privacy" className="text-xs text-gray-500 hover:text-gray-300 transition-colors">Confidentialité</Link>
+            <Link href="/cgu" className="text-xs text-gray-500 hover:text-gray-300 transition-colors">CGU</Link>
+            <p className="text-xs text-gray-500 flex items-center gap-1">
+              Fait avec <Heart className="w-3 h-3 text-primary-500" /> à Nice
+            </p>
+          </div>
         </div>
       </div>
     </footer>
