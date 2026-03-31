@@ -36,9 +36,9 @@ async function main() {
 
   console.log("Seeding users...");
   await runSQL(`INSERT INTO "User" ("id", "email", "name", "password", "role", "updatedAt") VALUES
-    ('user1', 'orga@ziben.fr', 'Marie Dupont', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'ORGANIZER', NOW()),
-    ('user2', 'admin@ziben.fr', 'Admin Ziben', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'ADMIN', NOW()),
-    ('user3', 'user@ziben.fr', 'Lucas Martin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'USER', NOW())
+    ('user1', 'orga@kefa.app', 'Marie Dupont', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'ORGANIZER', NOW()),
+    ('user2', 'admin@kefa.app', 'Admin Kefa', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'ADMIN', NOW()),
+    ('user3', 'user@kefa.app', 'Lucas Martin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'USER', NOW())
     ON CONFLICT DO NOTHING`);
   console.log("  ✓ 3 users");
 

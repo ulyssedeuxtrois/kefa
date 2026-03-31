@@ -71,10 +71,10 @@ export function PWAInstallPrompt() {
 
         <div className="flex items-start gap-3">
           <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0">
-            <img src="/icon.svg" alt="Ziben" className="w-full h-full" />
+            <img src="/icon.svg" alt="Kefa" className="w-full h-full" />
           </div>
           <div className="flex-1 pr-4">
-            <p className="font-semibold text-gray-900 text-sm">Installer Ziben</p>
+            <p className="font-semibold text-gray-900 text-sm">Installer Kefa</p>
             <p className="text-xs text-gray-500 mt-0.5">
               {isIOS
                 ? 'Appuie sur  puis "Sur l\'écran d\'accueil"'

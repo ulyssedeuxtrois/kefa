@@ -1,4 +1,4 @@
-name: 🔔 Ziben Event Reminders
+name: 🔔 Kefa Event Reminders
 
 on:
   schedule:
@@ -17,15 +17,15 @@ jobs:
         run: |
           curl -s -o /dev/null -w "%{http_code}" \
             -X POST \
-            -H "x-scraper-secret: ${{ secrets.ZIBEN_IMPORT_SECRET }}" \
-            "${{ secrets.ZIBEN_BASE_URL }}/api/admin/reminders"
+            -H "x-scraper-secret: ${{ secrets.KEFA_IMPORT_SECRET }}" \
+            "${{ secrets.KEFA_BASE_URL }}/api/admin/reminders"
 
       - name: Send boost expiry reminders
         run: |
           curl -s -o /dev/null -w "%{http_code}" \
             -X POST \
-            -H "x-scraper-secret: ${{ secrets.ZIBEN_IMPORT_SECRET }}" \
-            "${{ secrets.ZIBEN_BASE_URL }}/api/admin/boost-reminders"
+            -H "x-scraper-secret: ${{ secrets.KEFA_IMPORT_SECRET }}" \
+            "${{ secrets.KEFA_BASE_URL }}/api/admin/boost-reminders"
 
       - name: Summary
         if: always()

@@ -8,8 +8,8 @@ export default function CguPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-3">1. Objet</h2>
           <p className="text-gray-600">
-            Les présentes CGU régissent l&apos;utilisation de la plateforme <strong>Ziben</strong>,
-            accessible à l&apos;adresse ziben.fr. En utilisant Ziben, vous acceptez sans réserve les
+            Les présentes CGU régissent l&apos;utilisation de la plateforme <strong>Kefa</strong>,
+            accessible à l&apos;adresse kefa.app. En utilisant Kefa, vous acceptez sans réserve les
             présentes conditions.
           </p>
         </section>
@@ -17,7 +17,7 @@ export default function CguPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-3">2. Définitions</h2>
           <ul className="list-disc pl-5 text-gray-600 space-y-1">
-            <li><strong>Plateforme</strong> : le service Ziben accessible via le site et l&apos;application mobile</li>
+            <li><strong>Plateforme</strong> : le service Kefa accessible via le site et l&apos;application mobile</li>
             <li><strong>Utilisateur</strong> : toute personne consultant la plateforme</li>
             <li><strong>Organisateur</strong> : utilisateur ayant créé un compte pour publier des événements</li>
             <li><strong>Événement</strong> : toute manifestation référencée sur la plateforme</li>
@@ -32,7 +32,7 @@ export default function CguPage() {
             soumis à validation.
           </p>
           <p className="text-gray-600 mt-2">
-            Ziben se réserve le droit de suspendre ou supprimer tout compte en cas de non-respect des CGU,
+            Kefa se réserve le droit de suspendre ou supprimer tout compte en cas de non-respect des CGU,
             sans préavis.
           </p>
         </section>
@@ -50,8 +50,8 @@ export default function CguPage() {
             <li>Détenir les droits sur les contenus (textes, images) soumis</li>
           </ul>
           <p className="text-gray-600 mt-3">
-            Ziben se réserve le droit de refuser ou supprimer tout événement sans justification.
-            La validation n&apos;engage pas Ziben sur la tenue effective de l&apos;événement.
+            Kefa se réserve le droit de refuser ou supprimer tout événement sans justification.
+            La validation n&apos;engage pas Kefa sur la tenue effective de l&apos;événement.
           </p>
         </section>
 
@@ -73,7 +73,7 @@ export default function CguPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-3">6. Responsabilité</h2>
           <p className="text-gray-600">
-            Ziben est un intermédiaire technique. La plateforme n&apos;est pas organisatrice des événements
+            Kefa est un intermédiaire technique. La plateforme n&apos;est pas organisatrice des événements
             listés et ne saurait être tenue responsable de :
           </p>
           <ul className="list-disc pl-5 text-gray-600 space-y-1 mt-2">
@@ -87,8 +87,8 @@ export default function CguPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-3">7. Propriété intellectuelle</h2>
           <p className="text-gray-600">
-            La marque, le logo, le code et les contenus originaux de Ziben sont protégés. Les organisateurs
-            conservent la propriété de leurs contenus et accordent à Ziben une licence d&apos;affichage
+            La marque, le logo, le code et les contenus originaux de Kefa sont protégés. Les organisateurs
+            conservent la propriété de leurs contenus et accordent à Kefa une licence d&apos;affichage
             gratuite, non exclusive, pour la durée de présence sur la plateforme.
           </p>
         </section>
@@ -96,7 +96,7 @@ export default function CguPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-3">8. Modification des CGU</h2>
           <p className="text-gray-600">
-            Ziben se réserve le droit de modifier les présentes CGU à tout moment. Les utilisateurs
+            Kefa se réserve le droit de modifier les présentes CGU à tout moment. Les utilisateurs
             seront informés par notification sur la plateforme. La poursuite de l&apos;utilisation du service
             après modification vaut acceptation des nouvelles conditions.
           </p>
@@ -109,7 +109,7 @@ export default function CguPage() {
             des tribunaux du ressort de Nice (06).
           </p>
           <p className="text-gray-600 mt-2">
-            Contact : <a href="mailto:contact@ziben.fr" className="text-primary-600 hover:underline">contact@ziben.fr</a>
+            Contact : <a href="mailto:contact@kefa.app" className="text-primary-600 hover:underline">contact@kefa.app</a>
           </p>
         </section>
       </div>

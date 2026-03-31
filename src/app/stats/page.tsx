@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL || "https://ziben.onrender.com";
+  process.env.NEXT_PUBLIC_BASE_URL || "https://kefa.app";
 
 interface StatItem {
   label: string;
@@ -64,7 +64,7 @@ export default async function StatsPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
       <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
-        Ziben en chiffres
+        Kefa en chiffres
       </h1>
       <p className="text-gray-500 mb-10">
         L&apos;activité de la communauté en un coup d&apos;œil.

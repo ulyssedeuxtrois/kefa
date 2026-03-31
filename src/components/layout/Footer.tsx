@@ -13,10 +13,10 @@ export function Footer() {
               <div className="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-600 rounded-lg flex items-center justify-center">
                 <MapPin className="w-4 h-4 text-white" />
               </div>
-              <span className="text-lg font-bold text-white">Ziben</span>
+              <span className="text-lg font-bold text-white">Kefa</span>
             </Link>
             <p className="text-sm text-gray-400 max-w-xs">
-              Ziben, c&apos;est le spot de référence des sorties niçoises. Pas besoin de chercher partout.
+              Kefa, c&apos;est le spot de référence des sorties niçoises. Pas besoin de chercher partout.
             </p>
           </div>
 
@@ -49,14 +49,14 @@ export function Footer() {
               <li><Link href="/login" className="text-sm text-gray-400 hover:text-white transition-colors">Connexion</Link></li>
               <li><Link href="/register" className="text-sm text-gray-400 hover:text-white transition-colors">Inscription</Link></li>
               <li><Link href="/saved" className="text-sm text-gray-400 hover:text-white transition-colors">Mes favoris</Link></li>
-              <li><Link href="/stats" className="text-sm text-gray-400 hover:text-white transition-colors">Ziben en chiffres</Link></li>
+              <li><Link href="/stats" className="text-sm text-gray-400 hover:text-white transition-colors">Kefa en chiffres</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="mt-10 pt-6 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-gray-500">
-            &copy; {new Date().getFullYear()} Ziben. Tous droits réservés.
+            &copy; {new Date().getFullYear()} Kefa. Tous droits réservés.
           </p>
           <div className="flex items-center gap-4">
             <Link href="/legal" className="text-xs text-gray-500 hover:text-gray-300 transition-colors">Mentions légales</Link>

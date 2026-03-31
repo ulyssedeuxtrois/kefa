@@ -1,8 +1,8 @@
-# Architecture technique — Ziben
+# Architecture technique — Kefa
 
 ## Vue d'ensemble
 
-Ziben est une app Next.js full-stack déployée sur Render. Tout est dans un seul repo :
+Kefa est une app Next.js full-stack déployée sur Render. Tout est dans un seul repo :
 - Le front (React components)
 - Le back (API routes Next.js)
 - Les scripts (scraper, seeds)
@@ -63,7 +63,7 @@ GitHub Actions cron (toutes 6h)
               │
               ▼
         POST /api/events/import
-          header: x-import-secret: $ZIBEN_IMPORT_SECRET
+          header: x-import-secret: $KEFA_IMPORT_SECRET
               └── prisma.event.create (status=APPROVED, city=nice)
 ```
 

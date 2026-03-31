@@ -1,5 +1,5 @@
 /**
- * scraper.mjs — Ziben autonomous event scraper
+ * scraper.mjs — Kefa autonomous event scraper
  *
  * Sources :
  *   1. Eventbrite Nice  (JSON-LD dans les pages publiques)
@@ -8,13 +8,13 @@
  *
  * Usage :
  *   node scripts/scraper.mjs
- *   ZIBEN_IMPORT_SECRET=xxx ZIBEN_BASE_URL=https://ziben.onrender.com node scripts/scraper.mjs
+ *   KEFA_IMPORT_SECRET=xxx KEFA_BASE_URL=https://kefa.app node scripts/scraper.mjs
  *
  * En GitHub Actions : les secrets sont injectés automatiquement.
  */
 
-const BASE_URL = process.env.ZIBEN_BASE_URL || "https://ziben.onrender.com";
-const SECRET   = process.env.ZIBEN_IMPORT_SECRET || "";
+const BASE_URL = process.env.KEFA_BASE_URL || "https://kefa.app";
+const SECRET   = process.env.KEFA_IMPORT_SECRET || "";
 const DRY_RUN  = process.env.DRY_RUN === "1";
 
 const NICE_LAT  = 43.7102;
@@ -114,7 +114,7 @@ async function scrapeEventbrite() {
   try {
     const res = await fetch(url, {
       headers: {
-        "User-Agent": "Mozilla/5.0 (compatible; ZibenBot/1.0)",
+        "User-Agent": "Mozilla/5.0 (compatible; KefaBot/1.0)",
         "Accept": "application/json",
       },
     });
@@ -183,7 +183,7 @@ async function scrapeNiceFr() {
       + `&timings[gte]=${today}&timings[lte]=${future}`;
 
     const res = await fetch(url, {
-      headers: { "User-Agent": "Mozilla/5.0 (compatible; ZibenBot/1.0)" },
+      headers: { "User-Agent": "Mozilla/5.0 (compatible; KefaBot/1.0)" },
     });
 
     if (!res.ok) {
@@ -263,7 +263,7 @@ async function scrapeMeetup() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "User-Agent": "Mozilla/5.0 (compatible; ZibenBot/1.0)",
+        "User-Agent": "Mozilla/5.0 (compatible; KefaBot/1.0)",
       },
       body: JSON.stringify({ query }),
     });
@@ -326,7 +326,7 @@ function dedupe(events) {
   });
 }
 
-// ─── Import vers Ziben ────────────────────────────────────────────────────
+// ─── Import vers Kefa ────────────────────────────────────────────────────
 
 async function importEvents(events) {
   if (DRY_RUN) {
@@ -336,7 +336,7 @@ async function importEvents(events) {
   }
 
   if (!SECRET) {
-    console.log("⚠️  ZIBEN_IMPORT_SECRET manquant — import annulé");
+    console.log("⚠️  KEFA_IMPORT_SECRET manquant — import annulé");
     return;
   }
 
@@ -362,7 +362,7 @@ async function importEvents(events) {
 // ─── Main ─────────────────────────────────────────────────────────────────
 
 async function main() {
-  console.log(`🕷️  Ziben Scraper — ${new Date().toLocaleString("fr-FR")}`);
+  console.log(`🕷️  Kefa Scraper — ${new Date().toLocaleString("fr-FR")}`);
   console.log(`   Target: ${BASE_URL}\n`);
 
   const raw = await Promise.all([

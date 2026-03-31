@@ -8,10 +8,10 @@ export default function MentionsLegalesPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-3">Éditeur du site</h2>
           <p className="text-gray-600">
-            Le site <strong>Ziben</strong> (ziben.fr / ziben.onrender.com) est édité à titre personnel par :<br />
+            Le site <strong>Kefa</strong> (kefa.app / kefa.app) est édité à titre personnel par :<br />
             <strong>Ulysse Sigalat</strong><br />
             Adresse : Nice, France (06)<br />
-            Email : contact@ziben.fr<br />
+            Email : contact@kefa.app<br />
             Statut : auto-entrepreneur / personne physique
           </p>
         </section>
@@ -34,7 +34,7 @@ export default function MentionsLegalesPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-3">Activité</h2>
           <p className="text-gray-600">
-            Ziben est une plateforme de référencement d&apos;événements locaux à Nice et ses environs.
+            Kefa est une plateforme de référencement d&apos;événements locaux à Nice et ses environs.
             Le service permet aux organisateurs de publier leurs événements et au public de les découvrir.
             La plateforme n&apos;organise pas elle-même les événements référencés.
           </p>
@@ -43,8 +43,8 @@ export default function MentionsLegalesPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-3">Responsabilité</h2>
           <p className="text-gray-600">
-            Les informations publiées sur Ziben sont fournies par les organisateurs d&apos;événements.
-            Ziben ne saurait être tenu responsable des erreurs, omissions ou indisponibilités dans
+            Les informations publiées sur Kefa sont fournies par les organisateurs d&apos;événements.
+            Kefa ne saurait être tenu responsable des erreurs, omissions ou indisponibilités dans
             les informations relatives aux événements (dates, lieux, tarifs, annulations).
           </p>
           <p className="text-gray-600 mt-2">
@@ -56,13 +56,13 @@ export default function MentionsLegalesPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-3">Propriété intellectuelle</h2>
           <p className="text-gray-600">
-            Le code source, le design et les contenus originaux de Ziben sont la propriété exclusive
+            Le code source, le design et les contenus originaux de Kefa sont la propriété exclusive
             d&apos;Ulysse Sigalat. Toute reproduction totale ou partielle est interdite sans autorisation
             préalable.
           </p>
           <p className="text-gray-600 mt-2">
             Les contenus soumis par les utilisateurs (descriptions d&apos;événements, images) restent la
-            propriété de leurs auteurs. En les soumettant sur Ziben, ils accordent à la plateforme
+            propriété de leurs auteurs. En les soumettant sur Kefa, ils accordent à la plateforme
             une licence d&apos;affichage non exclusive et gratuite.
           </p>
         </section>
@@ -71,7 +71,7 @@ export default function MentionsLegalesPage() {
           <h2 className="text-xl font-semibold text-gray-800 mb-3">Paiements</h2>
           <p className="text-gray-600">
             Les paiements en ligne (boost d&apos;événements) sont traités par <strong>Stripe Inc.</strong>,
-            prestataire de paiement sécurisé. Ziben ne stocke aucune donnée bancaire.
+            prestataire de paiement sécurisé. Kefa ne stocke aucune donnée bancaire.
           </p>
         </section>
 

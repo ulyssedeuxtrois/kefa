@@ -1,20 +1,20 @@
-# Templates emails — Ziben
+# Templates emails — Kefa
 
 ---
 
 ## 1. Prospection organisateur (bar / salle / asso)
 
-**Objet :** Vos events sur Ziben — visible par toute Nice, gratuit
+**Objet :** Vos events sur Kefa — visible par toute Nice, gratuit
 
 ---
 
 Bonjour [Prénom / Nom du lieu],
 
-Je m'appelle Ulysse, je suis le fondateur de **Ziben** — l'app qui centralise tous les bons plans de Nice et les pousse directement aux habitants.
+Je m'appelle Ulysse, je suis le fondateur de **Kefa** — l'app qui centralise tous les bons plans de Nice et les pousse directement aux habitants.
 
 J'ai vu que vous organisez des événements régulièrement (concerts, soirées, ateliers...), et je voulais vous proposer de les publier gratuitement sur notre plateforme.
 
-**Ce que Ziben vous apporte :**
+**Ce que Kefa vous apporte :**
 - Votre event visible sur la carte interactive de Nice
 - Notification push à tous nos abonnés dès la publication
 - Page dédiée indexée sur Google (SEO automatique)
@@ -22,50 +22,50 @@ J'ai vu que vous organisez des événements régulièrement (concerts, soirées,
 
 **C'est gratuit, ça prend 2 minutes, et ça marche.**
 
-Pour publier votre prochain event → ziben.onrender.com/submit
+Pour publier votre prochain event → kefa.app/submit
 
 Si vous voulez discuter ou avoir un accès organisateur dédié avec dashboard, répondez à ce mail — je vous rappelle dans la journée.
 
 À bientôt,
 **Ulysse**
-Fondateur · Ziben · Nice
+Fondateur · Kefa · Nice
 
 ---
 
 ## 2. Relance (pas de réponse après 5 jours)
 
-**Objet :** Re : Vos events sur Ziben
+**Objet :** Re : Vos events sur Kefa
 
 ---
 
 Bonjour [Prénom],
 
-Je me permets de revenir vers vous au sujet de Ziben.
+Je me permets de revenir vers vous au sujet de Kefa.
 
 Je sais que votre agenda est chargé — c'est justement pour ça que j'ai voulu que la publication soit aussi simple que possible. **Pas de compte à créer, pas de contrat, pas de frais.**
 
 On a déjà des dizaines d'abonnés aux notifications à Nice. Chaque event publié leur est envoyé directement.
 
-Si vous avez 2 minutes ce week-end, testez : ziben.onrender.com/submit
+Si vous avez 2 minutes ce week-end, testez : kefa.app/submit
 
 Bonne journée,
-**Ulysse — Ziben**
+**Ulysse — Kefa**
 
 ---
 
 ## 3. Email de bienvenue (après inscription organisateur)
 
-**Objet :** Bienvenue sur Ziben, [Prénom] 👋
+**Objet :** Bienvenue sur Kefa, [Prénom] 👋
 
 ---
 
 Bonjour [Prénom],
 
-Votre compte organisateur est actif. Bienvenue dans l'aventure Ziben.
+Votre compte organisateur est actif. Bienvenue dans l'aventure Kefa.
 
 **Ce que vous pouvez faire maintenant :**
 
-1. **Publier votre premier event** → ziben.onrender.com/organizer
+1. **Publier votre premier event** → kefa.app/organizer
    (Il sera en ligne après validation, en moins de quelques heures)
 
 2. **Activer les notifications** pour être alerté des RSVPs
@@ -76,42 +76,42 @@ Votre compte organisateur est actif. Bienvenue dans l'aventure Ziben.
 
 À très vite,
 **Ulysse**
-Fondateur · Ziben
+Fondateur · Kefa
 
 ---
 
 ## 4. Confirmation event approuvé (à l'organisateur)
 
-**Objet :** ✅ Votre event est en ligne sur Ziben
+**Objet :** ✅ Votre event est en ligne sur Kefa
 
 ---
 
 Bonjour [Prénom],
 
-Votre event **"[Titre de l'event]"** vient d'être publié sur Ziben.
+Votre event **"[Titre de l'event]"** vient d'être publié sur Kefa.
 
-→ Voir la page : ziben.onrender.com/events/[id]
+→ Voir la page : kefa.app/events/[id]
 
 Une notification a été envoyée à tous nos abonnés à l'instant.
 
 **Envie de booster sa visibilité ?**
 Pour 5 à 20 €, votre event passe en tête de liste et reçoit une notification dédiée à toute la communauté.
-→ ziben.onrender.com/events/[id]#boost
+→ kefa.app/events/[id]#boost
 
 Bonne continuation,
-**L'équipe Ziben**
+**L'équipe Kefa**
 
 ---
 
 ## 5. Prospection mairie / office de tourisme
 
-**Objet :** Partenariat Ziben — agenda numérique des events niçois
+**Objet :** Partenariat Kefa — agenda numérique des events niçois
 
 ---
 
 Bonjour,
 
-Je suis Ulysse, fondateur de **Ziben**, une plateforme numérique qui centralise l'agenda des événements à Nice et les diffuse aux habitants via notifications push et géolocalisation.
+Je suis Ulysse, fondateur de **Kefa**, une plateforme numérique qui centralise l'agenda des événements à Nice et les diffuse aux habitants via notifications push et géolocalisation.
 
 Dans le cadre du développement de notre service, je souhaite proposer à [Mairie de Nice / Office de Tourisme] un **partenariat de référencement** : intégration de vos événements officiels dans notre catalogue, avec visibilité prioritaire.
 
@@ -121,8 +121,8 @@ Je serais ravi d'échanger 20 minutes avec vous pour explorer les modalités d'u
 
 Cordialement,
 **Ulysse [Nom]**
-Fondateur · Ziben
-contact@ziben.fr · ziben.onrender.com
+Fondateur · Kefa
+contact@kefa.app · kefa.app
 
 ---
 

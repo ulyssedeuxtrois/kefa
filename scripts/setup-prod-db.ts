@@ -57,21 +57,21 @@ async function main() {
   }
 
   const organizer = await prisma.user.upsert({
-    where: { email: "orga@ziben.fr" },
+    where: { email: "orga@kefa.app" },
     update: {},
-    create: { email: "orga@ziben.fr", name: "Marie Dupont", password: hashPassword("password123"), role: "ORGANIZER" },
+    create: { email: "orga@kefa.app", name: "Marie Dupont", password: hashPassword("password123"), role: "ORGANIZER" },
   });
 
   await prisma.user.upsert({
-    where: { email: "admin@ziben.fr" },
+    where: { email: "admin@kefa.app" },
     update: {},
-    create: { email: "admin@ziben.fr", name: "Admin Ziben", password: hashPassword("admin123"), role: "ADMIN" },
+    create: { email: "admin@kefa.app", name: "Admin Kefa", password: hashPassword("admin123"), role: "ADMIN" },
   });
 
   await prisma.user.upsert({
-    where: { email: "user@ziben.fr" },
+    where: { email: "user@kefa.app" },
     update: {},
-    create: { email: "user@ziben.fr", name: "Lucas Martin", password: hashPassword("password123"), role: "USER" },
+    create: { email: "user@kefa.app", name: "Lucas Martin", password: hashPassword("password123"), role: "USER" },
   });
 
   const now = new Date();

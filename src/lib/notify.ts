@@ -28,7 +28,7 @@ export async function notifyNewOrganizer(user: {
     embeds: [
       {
         title: "🎉 Nouvel organisateur",
-        description: `Un organisateur vient de s'inscrire sur Ziben.`,
+        description: `Un organisateur vient de s'inscrire sur Kefa.`,
         color: 0x22c55e,
         fields: [
           { name: "Nom", value: user.name || "—", inline: true },
@@ -82,7 +82,7 @@ export async function notifyNewEvent(event: {
           { name: "Soumis par", value: who, inline: true },
           {
             name: "Lien admin",
-            value: `${process.env.NEXT_PUBLIC_BASE_URL || "https://ziben.onrender.com"}/admin`,
+            value: `${process.env.NEXT_PUBLIC_BASE_URL || "https://kefa.app"}/admin`,
             inline: false,
           },
         ],

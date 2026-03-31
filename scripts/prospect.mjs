@@ -36,7 +36,7 @@ async function rateLimit() {
 function fetch(url) {
   return new Promise((resolve, reject) => {
     const mod = url.startsWith('https') ? https : http;
-    const req = mod.get(url, { headers: { 'User-Agent': 'ZibenProspect/1.0' } }, (res) => {
+    const req = mod.get(url, { headers: { 'User-Agent': 'KefaProspect/1.0' } }, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
@@ -309,7 +309,7 @@ function toCSV(venues) {
 // ===== MAIN =====
 
 async function main() {
-  console.log('=== Ziben Prospection — Nice ===\n');
+  console.log('=== Kefa Prospection — Nice ===\n');
 
   let venues = [];
 

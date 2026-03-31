@@ -134,7 +134,7 @@ function divider(slide, y = 1.15) {
 
   s.addText("🎯", { x: 0.6, y: 0.5, w: 0.7, h: 0.7, fontSize: 30 });
 
-  s.addText("Ziben", {
+  s.addText("Kefa", {
     x: 0.6, y: 1.2, w: 6, h: 1.1,
     fontSize: 60, bold: true, color: WHITE, fontFace: "Calibri",
   });
@@ -149,10 +149,10 @@ function divider(slide, y = 1.15) {
     fontSize: 15, color: "CCCCCC", fontFace: "Calibri", breakLine: true,
   });
 
-  s.addText("ziben.onrender.com", {
+  s.addText("kefa.app", {
     x: 0.6, y: 4.5, w: 4, h: 0.4,
     fontSize: 13, color: PRIMARY, fontFace: "Calibri",
-    hyperlink: { url: "https://ziben.onrender.com" },
+    hyperlink: { url: "https://kefa.app" },
   });
 }
 
@@ -379,7 +379,7 @@ function divider(slide, y = 1.15) {
   });
 
   const next = [
-    "Domaine ziben.fr + HTTPS custom",
+    "Domaine kefa.app + HTTPS custom",
     "Scraping events réels Nice",
     "Onboarding premiers organisateurs",
     "Dashboard analytics organisateur",
@@ -510,11 +510,11 @@ function divider(slide, y = 1.15) {
     s.addText(note, { x, y: 4.15, w: 2.5, h: 0.3, fontSize: 10, color: "AAAAAA", align: "center", fontFace: "Calibri" });
   });
 
-  s.addText("🌐  ziben.onrender.com", {
+  s.addText("🌐  kefa.app", {
     x: 0.6, y: 4.85, w: 4, h: 0.4,
     fontSize: 13, color: PRIMARY, fontFace: "Calibri",
   });
-  s.addText("✉️  contact@ziben.fr", {
+  s.addText("✉️  contact@kefa.app", {
     x: 5, y: 4.85, w: 4, h: 0.4,
     fontSize: 13, color: PRIMARY, fontFace: "Calibri", align: "right",
   });
@@ -522,5 +522,5 @@ function divider(slide, y = 1.15) {
 
 // ─── Export ────────────────────────────────────────────────────────────────
 
-await pptx.writeFile({ fileName: "ziben-pitch-deck.pptx" });
-console.log("✓ ziben-pitch-deck.pptx généré !");
+await pptx.writeFile({ fileName: "kefa-pitch-deck.pptx" });
+console.log("✓ kefa-pitch-deck.pptx généré !");

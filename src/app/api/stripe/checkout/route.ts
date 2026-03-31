@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Option invalide" }, { status: 400 });
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://ziben.onrender.com";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://kefa.app";
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],

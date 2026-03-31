@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import type { MetadataRoute } from "next";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_BASE_URL || "https://ziben.onrender.com";
+  process.env.NEXT_PUBLIC_BASE_URL || "https://kefa.app";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const events = await prisma.event.findMany({

@@ -1,4 +1,4 @@
-name: 🕷️ Ziben Event Scraper
+name: 🕷️ Kefa Event Scraper
 
 on:
   schedule:
@@ -29,8 +29,8 @@ jobs:
 
       - name: Run scraper
         env:
-          ZIBEN_BASE_URL: ${{ secrets.ZIBEN_BASE_URL }}
-          ZIBEN_IMPORT_SECRET: ${{ secrets.ZIBEN_IMPORT_SECRET }}
+          KEFA_BASE_URL: ${{ secrets.KEFA_BASE_URL }}
+          KEFA_IMPORT_SECRET: ${{ secrets.KEFA_IMPORT_SECRET }}
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         run: node scripts/scraper.mjs
 

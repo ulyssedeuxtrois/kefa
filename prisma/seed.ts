@@ -203,10 +203,10 @@ async function main() {
   // Create demo users
   console.log("\n👤 Creating demo users...");
   const organizer = await prisma.user.upsert({
-    where: { email: "orga@ziben.fr" },
+    where: { email: "orga@kefa.app" },
     update: {},
     create: {
-      email: "orga@ziben.fr",
+      email: "orga@kefa.app",
       name: "Marie Dupont",
       password: hashPassword("password123"),
       role: "ORGANIZER",
@@ -215,11 +215,11 @@ async function main() {
   console.log(`  ✓ Organizer: ${organizer.email}`);
 
   const admin = await prisma.user.upsert({
-    where: { email: "admin@ziben.fr" },
+    where: { email: "admin@kefa.app" },
     update: {},
     create: {
-      email: "admin@ziben.fr",
-      name: "Admin Ziben",
+      email: "admin@kefa.app",
+      name: "Admin Kefa",
       password: hashPassword("admin123"),
       role: "ADMIN",
     },
@@ -227,10 +227,10 @@ async function main() {
   console.log(`  ✓ Admin: ${admin.email}`);
 
   const user = await prisma.user.upsert({
-    where: { email: "user@ziben.fr" },
+    where: { email: "user@kefa.app" },
     update: {},
     create: {
-      email: "user@ziben.fr",
+      email: "user@kefa.app",
       name: "Lucas Martin",
       password: hashPassword("password123"),
       role: "USER",
@@ -272,9 +272,9 @@ async function main() {
 
   console.log("\n✅ Seed completed!");
   console.log("\n📋 Demo accounts:");
-  console.log("  User:       user@ziben.fr / password123");
-  console.log("  Organizer:  orga@ziben.fr / password123");
-  console.log("  Admin:      admin@ziben.fr / admin123");
+  console.log("  User:       user@kefa.app / password123");
+  console.log("  Organizer:  orga@kefa.app / password123");
+  console.log("  Admin:      admin@kefa.app / admin123");
 }
 
 main()

@@ -8,7 +8,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-3">1. Responsable du traitement</h2>
           <p className="text-gray-600">
-            Ulysse Sigalat — contact@ziben.fr — Nice, France.
+            Ulysse Sigalat — contact@kefa.app — Nice, France.
           </p>
         </section>
 
@@ -132,7 +132,7 @@ export default function PrivacyPage() {
             <li><strong>Limitation</strong> : limiter le traitement dans certains cas</li>
           </ul>
           <p className="text-gray-600 mt-3">
-            Pour exercer ces droits : <a href="mailto:contact@ziben.fr" className="text-primary-600 hover:underline">contact@ziben.fr</a>
+            Pour exercer ces droits : <a href="mailto:contact@kefa.app" className="text-primary-600 hover:underline">contact@kefa.app</a>
           </p>
           <p className="text-gray-600 mt-2">
             En cas de réclamation non résolue, vous pouvez saisir la <strong>CNIL</strong> : <a href="https://www.cnil.fr" className="text-primary-600 hover:underline">cnil.fr</a>
@@ -142,7 +142,7 @@ export default function PrivacyPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-800 mb-3">7. Cookies</h2>
           <p className="text-gray-600">
-            Ziben utilise uniquement les cookies strictement nécessaires au fonctionnement de la session
+            Kefa utilise uniquement les cookies strictement nécessaires au fonctionnement de la session
             (authentification). Aucun cookie publicitaire ou de tracking tiers n&apos;est utilisé.
           </p>
         </section>

@@ -1,4 +1,4 @@
-# Modèle financier — Ziben
+# Modèle financier — Kefa
 
 ## Sources de revenus
 
@@ -61,7 +61,7 @@ Tarif estimé : 50-200 €/mois selon visibilité.
 | Render.com (free) | 0 € | Limites : cold start, 512 MB RAM |
 | Neon (free) | 0 € | 0.5 GB stockage, 191h compute/mois |
 | Stripe | ~3% × CA | Frais de transaction (1.5% + 0.25€ CB FR) |
-| Domaine ziben.fr | ~1 €/mois | À acheter (~12 €/an) |
+| Domaine kefa.app | ~1 €/mois | À acheter (~12 €/an) |
 | **Total fixe** | **~1 €/mois** | Hors Stripe |
 
 ### Coûts si croissance
@@ -104,7 +104,7 @@ Pour la phase actuelle, **aucun seuil n'est à risque d'être atteint**. Pas de 
 
 ### Actions à fort ROI
 1. **Email prospection** (templates dans `docs/email-templates.md`) : 1h/semaine, coût = 0
-2. **Google My Business** pour Ziben : améliore le référencement local gratuit
+2. **Google My Business** pour Kefa : améliore le référencement local gratuit
 3. **Instagram Nice** : créer compte, poster les events phares, croissance organique
 4. **Partenariat OT Nice** : intégration agenda officiel → crédibilité + trafic
 
@@ -116,9 +116,9 @@ Pour la phase actuelle, **aucun seuil n'est à risque d'être atteint**. Pas de 
 ### Funnel organisateur
 ```
 Scraper détecte un event existant
-  → Event apparaît sur Ziben (APPROVED auto)
-  → L'organisateur découvre son event sur Ziben
-  → Email de prospection : "Votre event est sur Ziben, créez un compte"
+  → Event apparaît sur Kefa (APPROVED auto)
+  → L'organisateur découvre son event sur Kefa
+  → Email de prospection : "Votre event est sur Kefa, créez un compte"
   → Compte organisateur créé
   → Upsell boost
 ```

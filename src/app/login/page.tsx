@@ -37,7 +37,7 @@ export default function LoginPage() {
           </div>
           <h1 className="text-2xl font-bold">Connexion</h1>
           <p className="text-sm text-gray-500 mt-1">
-            Content de te revoir sur Ziben
+            Content de te revoir sur Kefa
           </p>
         </div>
 
@@ -96,22 +96,22 @@ export default function LoginPage() {
           <p className="text-xs font-medium text-gray-500 mb-2">Comptes de démo :</p>
           <div className="space-y-1 text-xs text-gray-600">
             <button
-              onClick={() => { setEmail("user@ziben.fr"); setPassword("password123"); }}
+              onClick={() => { setEmail("user@kefa.app"); setPassword("password123"); }}
               className="block hover:text-primary-600"
             >
-              Visiteur : user@ziben.fr / password123
+              Visiteur : user@kefa.app / password123
             </button>
             <button
-              onClick={() => { setEmail("orga@ziben.fr"); setPassword("password123"); }}
+              onClick={() => { setEmail("orga@kefa.app"); setPassword("password123"); }}
               className="block hover:text-primary-600"
             >
-              Organisateur : orga@ziben.fr / password123
+              Organisateur : orga@kefa.app / password123
             </button>
             <button
-              onClick={() => { setEmail("admin@ziben.fr"); setPassword("admin123"); }}
+              onClick={() => { setEmail("admin@kefa.app"); setPassword("admin123"); }}
               className="block hover:text-primary-600"
             >
-              Admin : admin@ziben.fr / admin123
+              Admin : admin@kefa.app / admin123
             </button>
           </div>
         </div>

@@ -66,7 +66,7 @@ export async function GET(request: NextRequest) {
     return new Response(csv, {
       headers: {
         "Content-Type": "text/csv; charset=utf-8",
-        "Content-Disposition": `attachment; filename="ziben-leads-${date}.csv"`,
+        "Content-Disposition": `attachment; filename="kefa-leads-${date}.csv"`,
       },
     });
   }
@@ -108,7 +108,7 @@ export async function GET(request: NextRequest) {
   return new Response(csv, {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
-      "Content-Disposition": `attachment; filename="ziben-events-${date}.csv"`,
+      "Content-Disposition": `attachment; filename="kefa-events-${date}.csv"`,
     },
   });
 }

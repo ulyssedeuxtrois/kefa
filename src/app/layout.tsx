@@ -15,15 +15,15 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://ziben.onrender.com"),
-  title: "Ziben — Ce soir, tu fais quoi ? | Événements à Nice",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://kefa.app"),
+  title: "Kefa — Ce soir, tu fais quoi ? | Événements à Nice",
   description:
     "Découvre les meilleurs événements à Nice : concerts, marchés, apéros, ateliers, expos. Tous les bons plans, au même endroit.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Ziben",
+    title: "Kefa",
   },
   icons: {
     icon: [
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: "Ziben — Ce soir, tu fais quoi ? | Événements à Nice",
+    title: "Kefa — Ce soir, tu fais quoi ? | Événements à Nice",
     description: "Découvre les meilleurs événements à Nice : concerts, marchés, apéros, ateliers, expos. Tous les bons plans, au même endroit.",
-    siteName: "Ziben",
+    siteName: "Kefa",
     type: "website",
     locale: "fr_FR",
     url: "/",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ziben — Ce soir, tu fais quoi ? | Événements à Nice",
+    title: "Kefa — Ce soir, tu fais quoi ? | Événements à Nice",
     description: "Découvre les meilleurs événements à Nice : concerts, marchés, apéros, ateliers, expos. Tous les bons plans, au même endroit.",
     images: ["/icons/icon-512.png"],
   },
@@ -76,7 +76,7 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Ziben" />
+        <meta name="apple-mobile-web-app-title" content="Kefa" />
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
         <link rel="apple-touch-startup-image" href="/icons/icon-512.png" />
         {/* Microsoft */}

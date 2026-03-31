@@ -41,7 +41,7 @@ export default function RegisterPage() {
           </div>
           <h1 className="text-2xl font-bold">Inscription</h1>
           <p className="text-sm text-gray-500 mt-1">
-            Rejoins Ziben en quelques secondes
+            Rejoins Kefa en quelques secondes
           </p>
         </div>
 

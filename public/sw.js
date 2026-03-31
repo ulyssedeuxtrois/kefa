@@ -1,5 +1,5 @@
-const CACHE_STATIC = 'ziben-static-v2';
-const CACHE_PAGES  = 'ziben-pages-v2';
+const CACHE_STATIC = 'kefa-static-v3';
+const CACHE_PAGES  = 'kefa-pages-v3';
 const OFFLINE_URL  = '/offline.html';
 
 // Assets to pre-cache on install
@@ -137,7 +137,7 @@ self.addEventListener('push', (event) => {
   if (!event.data) return;
   const data = event.data.json();
   event.waitUntil(
-    self.registration.showNotification(data.title || 'Ziben', {
+    self.registration.showNotification(data.title || 'Kefa', {
       body: data.body || 'Nouvel événement près de toi !',
       icon: '/icon.svg',
       badge: '/icon.svg',

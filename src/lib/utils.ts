@@ -84,10 +84,10 @@ export function getThisWeek(): { from: string; to: string } {
 
 export function generateSessionId(): string {
   if (typeof window === "undefined") return "";
-  let id = localStorage.getItem("ziben_session_id");
+  let id = localStorage.getItem("kefa_session_id");
   if (!id) {
     id = crypto.randomUUID();
-    localStorage.setItem("ziben_session_id", id);
+    localStorage.setItem("kefa_session_id", id);
   }
   return id;
 }

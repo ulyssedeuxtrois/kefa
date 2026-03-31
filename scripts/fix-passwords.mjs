@@ -28,9 +28,9 @@ function hashPassword(password) {
 }
 
 const users = [
-  { email: "user@ziben.fr", password: "password123" },
-  { email: "orga@ziben.fr", password: "password123" },
-  { email: "admin@ziben.fr", password: "admin123" },
+  { email: "user@kefa.app", password: "password123" },
+  { email: "orga@kefa.app", password: "password123" },
+  { email: "admin@kefa.app", password: "admin123" },
 ];
 
 console.log("Fixing user passwords with production NEXTAUTH_SECRET...\n");

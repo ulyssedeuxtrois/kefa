@@ -4,12 +4,12 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
 
-const FROM = "Ziben <noreply@ziben.fr>";
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://ziben.onrender.com";
+const FROM = "Kefa <noreply@kefa.app>";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://kefa.app";
 
 const footer = `
   <div style="margin-top:40px;padding-top:20px;border-top:1px solid #e5e5e5;text-align:center;color:#999;font-size:13px;">
-    Ziben &middot; Nice &middot; <a href="${BASE_URL}" style="color:#999;">ziben.onrender.com</a>
+    Kefa &middot; Nice &middot; <a href="${BASE_URL}" style="color:#999;">kefa.app</a>
   </div>
 `;
 
@@ -28,9 +28,9 @@ export async function sendWelcomeOrganizer(to: string, name: string) {
     await resend.emails.send({
       from: FROM,
       to,
-      subject: `Bienvenue sur Ziben, ${name} \u{1F44B}`,
+      subject: `Bienvenue sur Kefa, ${name} \u{1F44B}`,
       html: wrap(`
-        <h1 style="font-size:24px;color:#F97066;margin-bottom:8px;">Bienvenue sur Ziben !</h1>
+        <h1 style="font-size:24px;color:#F97066;margin-bottom:8px;">Bienvenue sur Kefa !</h1>
         <p>Salut <strong>${name}</strong>,</p>
         <p>Ton compte organisateur est cr\u00e9\u00e9. Tu peux maintenant publier tes events et toucher les Ni\u00e7ois en direct.</p>
         <a href="${BASE_URL}/organizer" style="display:inline-block;margin:20px 0;padding:12px 28px;background:#F97066;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">
@@ -52,10 +52,10 @@ export async function sendEventApproved(to: string, event: { title: string; id: 
     await resend.emails.send({
       from: FROM,
       to,
-      subject: `\u2705 Ton event est en ligne sur Ziben`,
+      subject: `\u2705 Ton event est en ligne sur Kefa`,
       html: wrap(`
         <h1 style="font-size:24px;color:#14B8A6;margin-bottom:8px;">Event approuv\u00e9 !</h1>
-        <p>Bonne nouvelle \u2014 <strong>${event.title}</strong> est maintenant visible sur Ziben.</p>
+        <p>Bonne nouvelle \u2014 <strong>${event.title}</strong> est maintenant visible sur Kefa.</p>
         <a href="${BASE_URL}/events/${event.id}" style="display:inline-block;margin:20px 0;padding:12px 28px;background:#14B8A6;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">
           Voir mon event
         </a>
@@ -101,7 +101,7 @@ export async function sendWeeklyDigest(
     await resend.emails.send({
       from: FROM,
       to,
-      subject: "Ziben \u2014 Les events de la semaine \u00e0 Nice \ud83c\udf89",
+      subject: "Kefa \u2014 Les events de la semaine \u00e0 Nice \ud83c\udf89",
       html: wrap(`
         <h1 style="font-size:24px;color:#F97066;margin-bottom:8px;">Les events de la semaine \ud83c\udf89</h1>
         <p>${greeting}</p>
@@ -112,7 +112,7 @@ export async function sendWeeklyDigest(
         <a href="${BASE_URL}" style="display:inline-block;margin:8px 0 20px;padding:12px 28px;background:#14B8A6;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">
           Voir tous les events
         </a>
-        <p style="color:#666;font-size:13px;">Tu re\u00e7ois cet email car tu as un compte sur Ziben.</p>
+        <p style="color:#666;font-size:13px;">Tu re\u00e7ois cet email car tu as un compte sur Kefa.</p>
       `),
     });
   } catch {}
@@ -143,7 +143,7 @@ export async function sendEventReminder(
         <a href="${BASE_URL}/events/${event.id}" style="display:inline-block;margin:8px 0 20px;padding:12px 28px;background:#F97066;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;">
           Voir l\u2019event
         </a>
-        <p style="color:#666;font-size:13px;">Tu re\u00e7ois cet email car tu as sauvegard\u00e9 cet event sur Ziben.</p>
+        <p style="color:#666;font-size:13px;">Tu re\u00e7ois cet email car tu as sauvegard\u00e9 cet event sur Kefa.</p>
       `),
     });
   } catch {}
@@ -158,7 +158,7 @@ export async function sendBoostExpiringSoon(
     await resend.emails.send({
       from: FROM,
       to,
-      subject: "Ton boost Ziben expire demain \u2014 renouvelle-le !",
+      subject: "Ton boost Kefa expire demain \u2014 renouvelle-le !",
       html: wrap(`
         <h1 style="font-size:24px;color:#F97066;margin-bottom:8px;">Ton boost expire demain !</h1>
         <p>Ton event <strong>${event.title}</strong> est mis en avant jusqu\u2019\u00e0 demain. Pour continuer \u00e0 appara\u00eetre en t\u00eate des r\u00e9sultats, renouvelle ton boost.</p>

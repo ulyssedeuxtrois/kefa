@@ -75,7 +75,7 @@ function ShareButtons({ event }: { event: EventWithCategory }) {
     try {
       await navigator.share({
         title: event.title,
-        text: `Découvre cet événement sur Ziben : ${event.title}`,
+        text: `Découvre cet événement sur Kefa : ${event.title}`,
         url,
       });
     } catch {
@@ -180,7 +180,7 @@ export default function EventPage() {
 
   useEffect(() => {
     if (event) {
-      document.title = `${event.title} — Ziben`;
+      document.title = `${event.title} — Kefa`;
     }
   }, [event]);
 
@@ -275,7 +275,7 @@ export default function EventPage() {
         isFree={event.isFree}
         imageUrl={event.imageUrl}
         sourceUrl={event.sourceUrl}
-        eventUrl={typeof window !== "undefined" ? window.location.href : `${process.env.NEXT_PUBLIC_BASE_URL || "https://ziben.onrender.com"}/events/${event.id}`}
+        eventUrl={typeof window !== "undefined" ? window.location.href : `${process.env.NEXT_PUBLIC_BASE_URL || "https://kefa.app"}/events/${event.id}`}
       />
       <Link
         href="/"

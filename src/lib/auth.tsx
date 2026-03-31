@@ -39,7 +39,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem("ziben_user");
+    const stored = localStorage.getItem("kefa_user");
     if (stored) {
       try {
         setUser(JSON.parse(stored));
@@ -56,7 +56,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
     const data = await res.json();
     if (!res.ok) return { error: data.error || "Erreur de connexion" };
-    localStorage.setItem("ziben_user", JSON.stringify(data));
+    localStorage.setItem("kefa_user", JSON.stringify(data));
     setUser(data);
     return {};
   }, []);
@@ -75,7 +75,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       const data = await res.json();
       if (!res.ok) return { error: data.error || "Erreur d'inscription" };
-      localStorage.setItem("ziben_user", JSON.stringify(data));
+      localStorage.setItem("kefa_user", JSON.stringify(data));
       setUser(data);
       return {};
     },
@@ -83,7 +83,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
 
   const logout = useCallback(() => {
-    localStorage.removeItem("ziben_user");
+    localStorage.removeItem("kefa_user");
     setUser(null);
     window.location.href = "/";
   }, []);

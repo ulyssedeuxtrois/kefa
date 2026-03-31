@@ -1,4 +1,4 @@
-# Sécurité — Ziben
+# Sécurité — Kefa
 
 ## État actuel : audit MVP
 
@@ -17,7 +17,7 @@
 - `.gitignore` couvre `.env`, `.env.local`
 
 ### Données bancaires
-- Stripe gère tout — Ziben ne touche jamais les données de carte
+- Stripe gère tout — Kefa ne touche jamais les données de carte
 - Pas de stockage de données de paiement en local
 
 ### Dépendances
@@ -101,4 +101,4 @@
 3. **Compromission GitHub** : révoquer le token GitHub Actions → recréer les secrets
 4. **Spam d'events** : passer tous les events à `PENDING` en DB : `UPDATE "Event" SET status='PENDING' WHERE status='APPROVED' AND "createdAt" > 'now - 1h'`
 
-Contact sécurité : contact@ziben.fr
+Contact sécurité : contact@kefa.app

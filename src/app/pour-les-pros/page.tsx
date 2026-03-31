@@ -14,9 +14,9 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "Pour les pros — Ziben",
+  title: "Pour les pros — Kefa",
   description:
-    "Publie tes événements sur Ziben et touche les Niçois. Gratuit, simple, efficace.",
+    "Publie tes événements sur Kefa et touche les Niçois. Gratuit, simple, efficace.",
 };
 
 const BENEFITS = [
@@ -51,7 +51,7 @@ const STEPS = [
   },
   {
     icon: CheckCircle,
-    text: "L'équipe Ziben valide en quelques heures",
+    text: "L'équipe Kefa valide en quelques heures",
   },
   {
     icon: Rocket,
@@ -97,7 +97,7 @@ export default function PourLesProPage() {
           </h1>
 
           <p className="text-lg sm:text-xl text-white/80 mb-10 max-w-xl mx-auto leading-relaxed">
-            Ziben pousse tes événements directement aux Niçois.
+            Kefa pousse tes événements directement aux Niçois.
             <br className="hidden sm:block" />
             Gratuit, simple, efficace.
           </p>
@@ -124,7 +124,7 @@ export default function PourLesProPage() {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-center mb-12 tracking-tight">
           Pourquoi publier sur{" "}
-          <span className="gradient-text">Ziben</span> ?
+          <span className="gradient-text">Kefa</span> ?
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
@@ -247,7 +247,7 @@ export default function PourLesProPage() {
           </p>
           <p className="text-gray-500 max-w-lg mx-auto leading-relaxed">
             Bars, salles de concert, associations, artistes, commerçants
-            &mdash;&nbsp;ils utilisent déjà Ziben.
+            &mdash;&nbsp;ils utilisent déjà Kefa.
           </p>
         </div>
       </section>

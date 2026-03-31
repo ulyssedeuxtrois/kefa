@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=5&countrycodes=fr`;
     const res = await fetch(url, {
       headers: {
-        "User-Agent": "Ziben/1.0 (local-events-app)",
+        "User-Agent": "Kefa/1.0 (local-events-app)",
       },
     });
 

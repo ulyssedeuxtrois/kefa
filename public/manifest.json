@@ -1,6 +1,6 @@
 {
-  "name": "Ziben — Ce soir, tu fais quoi ?",
-  "short_name": "Ziben",
+  "name": "Kefa — Ce soir, tu fais quoi ?",
+  "short_name": "Kefa",
   "description": "Tous les events de ta ville en un endroit. Concerts, marchés, ateliers, soirées.",
   "start_url": "/?utm_source=pwa",
   "scope": "/",

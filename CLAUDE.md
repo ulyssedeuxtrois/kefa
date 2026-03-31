@@ -1,10 +1,10 @@
-# Ziben — Contexte projet pour Claude
+# Kefa — Contexte projet pour Claude
 
-## C'est quoi Ziben
+## C'est quoi Kefa
 Plateforme d'événements locaux à Nice. Les habitants trouvent les bons plans, les organisateurs publient leurs events. MVP live sur Render.
 
-**URL prod** : https://ziben.onrender.com
-**Repo** : https://github.com/ulyssedeuxtrois/ziben
+**URL prod** : https://kefa.onrender.com
+**Repo** : https://github.com/ulyssedeuxtrois/kefa
 **Owner** : Ulysse Sigalat (ulyssedeuxtrois)
 
 ---
@@ -131,7 +131,7 @@ PushSubscription { endpoint, p256dh, auth, userId? }
 | `SCRAPER_SECRET` | Auth header `/api/events/import` + `/api/admin/leads` |
 | `STRIPE_SECRET_KEY` | Stripe API key |
 | `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret |
-| `NEXT_PUBLIC_BASE_URL` | https://ziben.onrender.com (pour Stripe redirect) |
+| `NEXT_PUBLIC_BASE_URL` | https://kefa.onrender.com (pour Stripe redirect) |
 | `VAPID_PUBLIC_KEY` | Web Push clé publique |
 | `VAPID_PRIVATE_KEY` | Web Push clé privée |
 | `DISCORD_WEBHOOK_URL` | (optionnel) Alertes Discord sur inscriptions/events |
@@ -140,8 +140,8 @@ PushSubscription { endpoint, p256dh, auth, userId? }
 
 | Secret | Usage |
 |--------|-------|
-| `ZIBEN_BASE_URL` | URL de l'app (ex: https://ziben.onrender.com) |
-| `ZIBEN_IMPORT_SECRET` | = `SCRAPER_SECRET` côté Render |
+| `KEFA_BASE_URL` | URL de l'app (ex: https://kefa.onrender.com) |
+| `KEFA_IMPORT_SECRET` | = `SCRAPER_SECRET` côté Render |
 
 ---
 
@@ -167,12 +167,12 @@ PushSubscription { endpoint, p256dh, auth, userId? }
 
 - [ ] Ajouter `STRIPE_SECRET_KEY` + `STRIPE_WEBHOOK_SECRET` sur Render
 - [ ] Ajouter GitHub secrets pour le scraper
-- [ ] Acheter `ziben.fr` et connecter à Render
+- [ ] Acheter `kefa.fr` et connecter à Render
 - [ ] Campagne email prospection organisateurs (templates dans docs/)
 - [ ] Soumettre sitemap à Google Search Console
 - [ ] Expiration automatique des boosts (cron qui set `boosted: false` si `boostedUntil < now`)
 - [ ] Page `/events/[id]` — afficher sourceUrl pour les events scrapés
-- [ ] App mobile TWA (dossier `projets/apps/ziben-twa/`)
+- [ ] App mobile TWA (dossier `projets/apps/kefa-twa/`)
 
 ---
 

@@ -1,6 +1,6 @@
-# Crash Test Report — Ziben
+# Crash Test Report — Kefa
 **Date :** 30 mars 2026
-**URL :** https://ziben.onrender.com
+**URL :** https://kefa.app
 **Stack :** Next.js 14, TypeScript, Tailwind, Prisma, PostgreSQL Neon
 **Testeur :** Claude (Puppeteer headless)
 
@@ -61,10 +61,10 @@
 
 ### 8. Login — CRITIQUE
 - Tous les comptes échouent avec "Email ou mot de passe incorrect"
-  - `user@ziben.fr / password123` — KO
-  - `orga@ziben.fr / password123` — KO
-  - `admin@ziben.fr / admin123` — KO
-  - `test@ziben.fr / password123` — KO (compte inexistant)
+  - `user@kefa.app / password123` — KO
+  - `orga@kefa.app / password123` — KO
+  - `admin@kefa.app / admin123` — KO
+  - `test@kefa.app / password123` — KO (compte inexistant)
 - **Cause identifiée :** le hash du mot de passe utilise `NEXTAUTH_SECRET || "dev-secret"`. Si la variable `NEXTAUTH_SECRET` sur Render est différente de `"dev-secret"`, les hashes ne correspondent pas. Le seed a été lancé avec une valeur, la prod tourne avec une autre.
 - **Impact :** 100% des fonctionnalités authentifiées sont inaccessibles (saved, organizer, etc.)
 
