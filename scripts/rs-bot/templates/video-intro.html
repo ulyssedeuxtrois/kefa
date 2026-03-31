@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background: #0a0a0a;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative;
+  }
+
+  /* Gradient blob décoratif */
+  .blob {
+    position: absolute;
+    width: 900px; height: 900px;
+    background: radial-gradient(circle, rgba(255,90,54,0.35) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+  }
+
+  .blob2 {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(16,185,129,0.2) 0%, transparent 70%);
+    bottom: 10%; right: -10%;
+    border-radius: 50%;
+  }
+
+  /* Grille déco */
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    display: flex; flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .logo-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+  }
+
+  .logo-icon {
+    width: 160px; height: 160px;
+    filter: drop-shadow(0 20px 60px rgba(255,90,54,0.5));
+  }
+
+  .brand {
+    font-size: 96px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -3px;
+    line-height: 1;
+  }
+
+  .brand .q { color: #ff5a36; }
+
+  .tagline {
+    font-size: 36px;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .location-chip {
+    background: rgba(255,90,54,0.15);
+    border: 1.5px solid rgba(255,90,54,0.4);
+    color: #ff5a36;
+    font-size: 28px;
+    font-weight: 700;
+    padding: 14px 36px;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Bottom handle */
+  .handle {
+    position: absolute;
+    bottom: 80px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 28px;
+    color: rgba(255,255,255,0.3);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+  <div class="blob"></div>
+  <div class="blob2"></div>
+  <div class="grid"></div>
+
+  <div class="content">
+    <div class="logo-wrap">
+      <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ff7040"/>
+            <stop offset="100%" stop-color="#ff4515"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="96" height="96" rx="22" fill="url(#g)"/>
+        <text x="50" y="72" text-anchor="middle"
+          font-family="'Segoe UI',system-ui,sans-serif"
+          font-size="72" font-weight="900" fill="white">?</text>
+      </svg>
+
+      <div class="brand">kefa<span class="q">?</span></div>
+    </div>
+
+    <div class="tagline">les bons plans du soir</div>
+    <div class="location-chip">📍 Côte d'Azur</div>
+  </div>
+
+  <div class="handle">@kefa.nice</div>
+</body>
+</html>

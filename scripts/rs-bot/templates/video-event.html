@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background: #0a0a0a;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    position: relative;
+    display: flex; flex-direction: column;
+  }
+
+  /* Fond coloré en haut */
+  .hero-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 960px;
+    background: linear-gradient(160deg, #ff7040 0%, #ff5a36 50%, #1a0a05 100%);
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 300px;
+    background: linear-gradient(to bottom, transparent, #0a0a0a);
+  }
+
+  /* Grille déco subtile */
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    z-index: 1;
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    display: flex; flex-direction: column;
+    height: 100%;
+    padding: 80px 72px;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: auto;
+  }
+
+  .brand-small {
+    font-size: 32px; font-weight: 900; color: rgba(255,255,255,0.9);
+    letter-spacing: -0.5px;
+  }
+  .brand-small .q { color: rgba(255,255,255,0.5); }
+
+  .event-num {
+    font-size: 22px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Emoji géant */
+  .emoji-zone {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+  }
+
+  .big-emoji {
+    font-size: 280px;
+    line-height: 1;
+    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.4));
+  }
+
+  /* Infos event */
+  .event-info {
+    margin-top: auto;
+    padding-top: 60px;
+  }
+
+  .category-chip {
+    display: inline-block;
+    background: rgba(255,90,54,0.2);
+    border: 1.5px solid rgba(255,90,54,0.5);
+    color: #ff7a5c;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    border-radius: 40px;
+    margin-bottom: 28px;
+  }
+
+  .event-title {
+    font-size: 68px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 36px;
+  }
+
+  .event-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .meta-icon {
+    width: 52px; height: 52px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
+  }
+
+  .meta-text {
+    font-size: 34px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 500;
+  }
+
+  .meta-text strong {
+    color: white;
+    font-weight: 700;
+  }
+
+  .price-badge {
+    display: inline-block;
+    margin-top: 36px;
+    background: #ff5a36;
+    color: white;
+    font-size: 36px;
+    font-weight: 900;
+    padding: 16px 40px;
+    border-radius: 50px;
+  }
+
+  .price-badge.free {
+    background: #10b981;
+  }
+</style>
+</head>
+<body>
+  <div class="hero-bg"></div>
+  <div class="grid"></div>
+
+  <div class="content">
+    <div class="header">
+      <div class="brand-small">kefa<span class="q">?</span></div>
+      <div class="event-num" id="event-num">01 / 03</div>
+    </div>
+
+    <div class="emoji-zone">
+      <div class="big-emoji" id="emoji">🎤</div>
+    </div>
+
+    <div class="event-info">
+      <div class="category-chip" id="category">Musique</div>
+      <div class="event-title" id="title">Open Mic — Le Bulldog Nice</div>
+
+      <div class="event-meta">
+        <div class="meta-row">
+          <div class="meta-icon">🕐</div>
+          <div class="meta-text"><strong id="time">20h30</strong> · ce soir</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-icon">📍</div>
+          <div class="meta-text" id="location">Vieux-Nice</div>
+        </div>
+      </div>
+
+      <div class="price-badge free" id="price">Gratuit</div>
+    </div>
+  </div>
+
+<script>
+  const ev = JSON.parse('__EVENT_JSON__');
+  const idx = __EVENT_INDEX__;
+  const total = __EVENT_TOTAL__;
+
+  const icons = {
+    'musique': '🎵', 'concert': '🎵',
+    'art': '🎨', 'expo': '🎨',
+    'sport': '⚽', 'balade': '🥾',
+    'theatre': '🎭', 'spectacle': '🎭',
+    'degustation': '🍷', 'marche': '🛍️',
+    'jeux': '🎮', 'enfants': '🎈',
+    'default': '📅'
+  };
+
+  document.getElementById('event-num').textContent =
+    String(idx + 1).padStart(2,'0') + ' / ' + String(total).padStart(2,'0');
+
+  document.getElementById('emoji').textContent =
+    icons[ev.category?.slug] || icons.default;
+
+  document.getElementById('category').textContent =
+    ev.category?.name || 'Événement';
+
+  document.getElementById('title').textContent = ev.title;
+
+  document.getElementById('time').textContent =
+    new Date(ev.date).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+
+  document.getElementById('location').textContent =
+    ev.address ? ev.address.split(',')[0] : (ev.city || 'Nice');
+
+  const priceEl = document.getElementById('price');
+  if (ev.isFree) {
+    priceEl.textContent = 'Gratuit 🎉';
+    priceEl.classList.add('free');
+  } else if (ev.price) {
+    priceEl.textContent = ev.price + '€';
+    priceEl.classList.remove('free');
+  } else {
+    priceEl.style.display = 'none';
+  }
+</script>
+</body>
+</html>

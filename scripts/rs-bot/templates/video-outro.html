@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background: #0a0a0a;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative;
+  }
+
+  .blob {
+    position: absolute;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(255,90,54,0.25) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -60%);
+    border-radius: 50%;
+  }
+
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .content {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 56px;
+    text-align: center;
+  }
+
+  .logo-icon { width: 140px; height: 140px; }
+
+  .cta-text {
+    font-size: 72px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    letter-spacing: -2px;
+  }
+
+  .cta-text .accent { color: #ff5a36; }
+
+  .url-badge {
+    background: #ff5a36;
+    color: white;
+    font-size: 40px;
+    font-weight: 800;
+    padding: 20px 56px;
+    border-radius: 50px;
+    letter-spacing: -0.5px;
+  }
+
+  .sub {
+    font-size: 28px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="blob"></div>
+  <div class="grid"></div>
+
+  <div class="content">
+    <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ff7040"/>
+          <stop offset="100%" stop-color="#ff4515"/>
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="96" height="96" rx="22" fill="url(#g)"/>
+      <text x="50" y="72" text-anchor="middle"
+        font-family="'Segoe UI',system-ui,sans-serif"
+        font-size="72" font-weight="900" fill="white">?</text>
+    </svg>
+
+    <div class="cta-text">
+      Tous les bons plans<br>de la <span class="accent">Côte d'Azur</span>
+    </div>
+
+    <div class="url-badge">kefa.fr</div>
+
+    <div class="sub">@kefa.nice · chaque soir</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+name: 📱 Kefa RS Bot — Post quotidien
+
+on:
+  schedule:
+    # Tous les jours à 17h UTC = 19h heure de Paris (heure d'été)
+    - cron: '0 17 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (affiche sans publier)'
+        required: false
+        default: 'false'
+      skip_video:
+        description: 'Images seulement (pas de vidéo)'
+        required: false
+        default: 'false'
+
+jobs:
+  post:
+    name: Générer et publier le contenu du soir
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Installer dépendances système (Chromium + FFmpeg + fonts)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq \
+            chromium-browser \
+            ffmpeg \
+            fonts-noto-color-emoji \
+            fonts-liberation \
+            --no-install-recommends
+
+      - name: Installer packages npm
+        run: npm install puppeteer cloudinary googleapis
+
+      - name: Lancer le RS Bot
+        env:
+          KEFA_BASE_URL:           ${{ secrets.KEFA_BASE_URL }}
+          META_ACCESS_TOKEN:       ${{ secrets.META_ACCESS_TOKEN }}
+          IG_USER_ID:              ${{ secrets.IG_USER_ID }}
+          FB_PAGE_ID:              ${{ secrets.FB_PAGE_ID }}
+          CLOUDINARY_URL:          ${{ secrets.CLOUDINARY_URL }}
+          YOUTUBE_CLIENT_ID:       ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET:   ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN:   ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          PUPPETEER_EXECUTABLE_PATH: /usr/bin/chromium-browser
+          DRY_RUN:    ${{ github.event.inputs.dry_run    || 'false' }}
+          SKIP_VIDEO: ${{ github.event.inputs.skip_video || 'false' }}
+        run: node scripts/rs-bot/index.mjs
+
+      - name: Résumé
+        if: always()
+        run: echo "RS Bot terminé — voir les logs ci-dessus"

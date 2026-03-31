@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, #ff7040 0%, #ff5a36 40%, #10b981 100%);
+    position: relative;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%);
+  }
+
+  .content {
+    position: absolute;
+    inset: 0;
+    padding: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* ── TOP ── */
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .logo-icon {
+    width: 72px;
+    height: 72px;
+  }
+
+  .logo-text {
+    font-size: 38px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -1px;
+  }
+
+  .logo-text .q { color: rgba(255,255,255,0.7); }
+
+  .location-badge {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 40px;
+  }
+
+  /* ── HEADLINE ── */
+  .headline {
+    font-size: 120px;
+    font-weight: 900;
+    color: white;
+    line-height: 0.95;
+    letter-spacing: -4px;
+    text-shadow: 0 4px 32px rgba(0,0,0,0.2);
+  }
+
+  /* ── EVENTS ── */
+  .events {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .event {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .event-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  .event-info { flex: 1; min-width: 0; }
+
+  .event-name {
+    font-size: 26px;
+    font-weight: 800;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .event-meta {
+    font-size: 20px;
+    color: rgba(255,255,255,0.72);
+    margin-top: 2px;
+  }
+
+  .event-price {
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffd166;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<div class="content">
+  <div class="top">
+    <div class="logo">
+      <svg class="logo-icon" viewBox="0 0 100 118" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0.15)"/>
+          </linearGradient>
+        </defs>
+        <rect x="5" y="5" width="90" height="90" rx="16" fill="url(#lg)" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+        <polygon points="8,93 2,116 34,93" fill="rgba(255,255,255,0.25)"/>
+        <text x="50" y="70" text-anchor="middle"
+          font-family="'Segoe UI',system-ui,sans-serif"
+          font-size="62" font-weight="900" fill="white">?</text>
+      </svg>
+      <div class="logo-text">kefa<span class="q">?</span></div>
+    </div>
+    <div class="location-badge" id="location">📍 Nice · Ce soir</div>
+  </div>
+
+  <div class="headline" id="headline">kefa<br>ce soir ?</div>
+
+  <div class="events" id="events-list">
+    <!-- Injecté par le script -->
+  </div>
+</div>
+
+<script>
+  const events = JSON.parse('__EVENTS_JSON__');
+  const date   = '__DATE_LABEL__';
+
+  document.getElementById('location').textContent = '📍 Côte d\'Azur · ' + date;
+  document.getElementById('headline').innerHTML = 'kefa<br>' + date.toLowerCase() + ' ?';
+
+  const icons = {
+    'musique': '🎵', 'concert': '🎵',
+    'art': '🎨', 'expo': '🎨',
+    'sport': '⚽', 'balade': '🥾',
+    'theatre': '🎭', 'spectacle': '🎭',
+    'degustation': '🍷', 'marche': '🛍️',
+    'jeux': '🎮', 'enfants': '🎈',
+    'default': '📅'
+  };
+
+  function getIcon(slug) {
+    return icons[slug] || icons.default;
+  }
+
+  function formatPrice(event) {
+    return event.isFree ? 'Gratuit' : (event.price ? event.price + '€' : '');
+  }
+
+  function formatTime(dateStr) {
+    const d = new Date(dateStr);
+    return d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  const container = document.getElementById('events-list');
+  events.slice(0, 3).forEach(ev => {
+    const icon = getIcon(ev.category?.slug);
+    const price = formatPrice(ev);
+    const time = formatTime(ev.date);
+    const location = ev.city || 'Nice';
+
+    container.innerHTML += `
+      <div class="event">
+        <span class="event-icon">${icon}</span>
+        <div class="event-info">
+          <div class="event-name">${ev.title}</div>
+          <div class="event-meta">${time} · ${location}</div>
+        </div>
+        <div class="event-price">${price}</div>
+      </div>
+    `;
+  });
+</script>
+</body>
+</html>
